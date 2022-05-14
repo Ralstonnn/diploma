@@ -7,7 +7,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-#outer-container {
+.outer-container {
   display: flex;
   width: 100vw;
   flex-direction: column;

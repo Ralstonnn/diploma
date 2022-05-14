@@ -12,7 +12,7 @@ module.exports = {
         }
         if (res[0].password === req.body.password) {
           req.session.loggedIn = true;
-          req.session.login = req.login;
+          req.session.login = req.body.login;
           resp.json({ response: "y" });
           return null;
         }

@@ -8,7 +8,12 @@ export function LearnWords() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    fetch("/api/get-data")
+    const formData = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch("/api/get-words", formData)
       .then((resp) => resp.json())
       .then((data) => {
         setWordsDefs(data);

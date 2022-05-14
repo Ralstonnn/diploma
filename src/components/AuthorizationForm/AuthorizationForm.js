@@ -1,10 +1,11 @@
 import "./style.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export function AuthorizationForm(isLoggedIn) {
+export function AuthorizationForm() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  let navigate = useNavigate();
 
   const postHandler = (e) => {
     e.preventDefault();
@@ -21,13 +22,8 @@ export function AuthorizationForm(isLoggedIn) {
     fetch("/api/login", formData)
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data.response);
-
-        isLoggedIn();
-        setLoggedIn(data.response === "y");
+        if (data.response === "y") navigate("/");
       });
-
-    console.log("test");
   };
 
   return (

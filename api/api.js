@@ -21,11 +21,14 @@ app.use(
   })
 );
 
-app.get("/api/get-data", (req, resp) => {
-  con.query("select * from words", (err, res) => {
-    if (err) throw err;
-    resp.json(res);
-  });
+app.post("/api/get-words", (req, resp) => {
+  con.query(
+    `select w.word, w.definition from words w inner join user u on w.user_id = u.id where u.login = '${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      resp.json(res);
+    }
+  );
 });
 
 // TODO: Write code to finish a training
