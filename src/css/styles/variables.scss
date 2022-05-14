@@ -1,0 +1,35 @@
+@use "sass:map";
+
+$indents: (
+  "none": 0,
+);
+@for $i from 1 through 200 {
+  $indents: map.set($indents, #{$i}, #{$i}#{"px"});
+}
+
+$container-width: (
+  "1344": 1344px,
+);
+
+$flex-grow: ();
+@for $i from 1 to 11 {
+  $flex-grow: map.set($flex-grow, #{$i}, $i);
+}
+
+$flex-items: (
+  "1": 100%,
+  "2": calc(100% / 2),
+  "3": calc(100% / 3),
+  "4": calc(100% / 4),
+  "5": calc(100% / 5),
+  "6": calc(100% / 6),
+  "7": calc(100% / 7),
+  "8": calc(100% / 8),
+  "9": calc(100% / 9),
+  "10": calc(100% / 10),
+);
+
+$colors: (
+  "main-sd": #333,
+  "main-b": #fff,
+);

@@ -1,0 +1,87 @@
+@use "variables" as var;
+
+.flex {
+  display: flex;
+  height: fit-content;
+
+  &.flex-a {
+    &-center {
+      align-items: center;
+    }
+  }
+
+  .flex-a-s {
+    &-center {
+      align-self: center;
+    }
+    &-end {
+      align-self: flex-end;
+    }
+    &-start {
+      align-self: flex-start;
+    }
+    &-baseline {
+      align-self: baseline;
+    }
+  }
+
+  &.flex-j {
+    &-center {
+      justify-content: center;
+    }
+
+    &-space-between {
+      justify-content: space-between;
+    }
+  }
+
+  &.flex-o {
+    &-vertical {
+      flex-direction: column;
+      &-reverse {
+        flex-direction: column-reverse;
+      }
+    }
+    &-horizontal {
+      flex-direction: row;
+      &-reverse {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .flex-item {
+    // flex-grow: 1;
+    width: 100%;
+
+    @each $name, $item in var.$flex-items {
+      &-#{$name} {
+        width: $item;
+      }
+    }
+  }
+
+  &.flex-grow {
+    @each $name, $value in var.$flex-grow {
+      &-#{$name} {
+        flex-grow: $value;
+      }
+    }
+  }
+
+  @each $name, $ind in var.$indents {
+    &.flex-gap-#{$name} {
+      gap: $ind;
+    }
+    &.flex-gap-c-#{$name} {
+      column-gap: $ind;
+    }
+    &.flex-gap-r-#{$name} {
+      row-gap: $ind;
+    }
+  }
+}

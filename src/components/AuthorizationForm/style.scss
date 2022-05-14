@@ -1,0 +1,8 @@
+@use "../../css/styles/variables.scss" as var;
+@use "sass:map";
+
+.auth-form-wrapper {
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: map.get(var.$colors, "main-sd");
+}

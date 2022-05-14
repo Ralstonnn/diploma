@@ -1,0 +1,115 @@
+@use "variables" as var;
+
+// INDENTS
+@each $name, $ind in var.$indents {
+  .p-#{$name} {
+    padding: $ind;
+  }
+  .p-v-#{$name} {
+    padding-top: $ind;
+    padding-bottom: $ind;
+  }
+  .p-h-#{$name} {
+    padding-left: $ind;
+    padding-right: $ind;
+  }
+  .p-t-#{$name} {
+    padding-top: $ind;
+  }
+  .p-b-#{$name} {
+    padding-bottom: $ind;
+  }
+  .p-r-#{$name} {
+    padding-right: $ind;
+  }
+  .p-l-#{$name} {
+    padding-left: $ind;
+  }
+
+  .m-#{$name} {
+    margin: $ind;
+  }
+  .m-v-#{$name} {
+    margin-top: $ind;
+    margin-bottom: $ind;
+  }
+  .m-h-#{$name} {
+    margin-left: $ind;
+    margin-right: $ind;
+  }
+  .m-t-#{$name} {
+    margin-top: $ind;
+  }
+  .m-b-#{$name} {
+    margin-bottom: $ind;
+  }
+  .m-r-#{$name} {
+    margin-right: $ind;
+  }
+  .m-l-#{$name} {
+    margin-left: $ind;
+  }
+}
+
+.ind-none {
+  padding: 0;
+  margin: 0;
+}
+
+// INPUTS
+input {
+  padding: 10px;
+}
+
+button,
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
+  border: 1px solid black;
+  border-radius: 2px;
+  text-decoration: none;
+  color: black;
+  font-size: 1em;
+
+  &:hover {
+    background-color: rgba(90, 90, 90, 0.164);
+  }
+}
+
+.overflow {
+  &-y {
+    &-scroll {
+      overflow-y: scroll;
+    }
+  }
+}
+
+// BORDERS
+.border-round-tiny {
+  border-radius: 2px;
+}
+
+// FONTS
+.font-weight-bold {
+  font-weight: bolder;
+}
+
+h1,
+.h1 {
+  font-weight: bolder;
+  font-size: 1.5em;
+}
+
+@each $name, $value in var.$colors {
+  .bg-#{$name} {
+    background-color: $value;
+
+    &-hover {
+      &:hover {
+        background-color: $value;
+      }
+    }
+  }
+}

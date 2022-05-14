@@ -1,0 +1,8 @@
+@use "variables" as var;
+
+@each $name, $width in var.$container-width {
+  .container-#{$name} {
+    width: $width;
+    padding: 50px 25px;
+  }
+}

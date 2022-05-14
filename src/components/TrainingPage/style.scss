@@ -1,0 +1,18 @@
+.training-card {
+  width: 700px;
+  height: 600px;
+
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.training-btn {
+  width: 170px;
+  height: 110px;
+  background-color: aqua;
+  border: none;
+
+  & ~ .training-btn {
+    margin-left: 30px;
+  }
+}
