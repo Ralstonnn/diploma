@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import "./style.scss";
 
-export function Header({ login, isLoggedIn }) {
+export function Header({ login }) {
   return (
     <header className="flex">
       <h1 className="p-h-40">EngSite</h1>
       <HeaderButton href="/" text="Home" />
       <HeaderButton href="/training" text="Training" className="flex" />
       <div className="flex-item"></div>
-      <h1>{login}</h1>
-      {isLoggedIn ? (
+      <h1>{sessionStorage.getItem("login")}</h1>
+      {sessionStorage.getItem("isLoggedIn") ? (
         <LoginButton text="Logout" />
       ) : (
         <LoginButton text="Login" />
