@@ -20,6 +20,12 @@ module.exports = {
       }
     );
   },
+  register: function (req, resp) {
+    con.query(
+      `insert into user (login, password) value ('${req.body.login}', '${req.body.password}')`
+    );
+    resp.json({ response: "y" });
+  },
   isLoggedIn: function (req, resp) {
     if (req.session.loggedIn) {
       resp.json({
@@ -31,5 +37,9 @@ module.exports = {
     }
 
     resp.json({ response: "n" });
+  },
+  logout: function (req, resp) {
+    req.session.loggedIn = false;
+    resp.json({ response: "y" });
   },
 };

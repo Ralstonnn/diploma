@@ -41,8 +41,8 @@ app.post("/api/finish-training", (req, resp) => {
  */
 app.post("/api/is-logged-in", loginSystem.isLoggedIn);
 app.post("/api/login", loginSystem.login);
-
-app.post("/api/test", loginSystem.login);
+app.post("/api/logout", loginSystem.logout);
+app.post("/api/register", loginSystem.register);
 
 app.listen(PORT, () =>
   console.log(`Server listening to http://localhost:${PORT}...`)

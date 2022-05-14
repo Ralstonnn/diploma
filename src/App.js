@@ -22,13 +22,11 @@ function App() {
       .then((data) => {
         if (!(data.response === "y")) navigate("/login");
         else {
-          setTimeout(() => {
-            sessionStorage.setItem("isLoading", "n");
-            sessionStorage.setItem("isLoggedIn", "y");
-            sessionStorage.setItem("login", data.login);
+          sessionStorage.setItem("isLoading", "n");
+          sessionStorage.setItem("isLoggedIn", "y");
+          sessionStorage.setItem("login", data.login);
 
-            setIsLoading(false);
-          }, 3000);
+          setIsLoading(false);
         }
       });
   }
@@ -39,15 +37,15 @@ function App() {
     checkIfLoggedIn();
   }, []);
 
-  if (isLoading) return <LoadingPage />;
-  else return <MainPage />;
+  if (!isLoading) return <MainPage />;
+  return <LoadingPage />;
 }
 
-function MainPage({ login }) {
+function MainPage() {
   return (
     <div className="outer-container">
       <Header />
-      <main className="container-1344">
+      <main className="container-1344 flex">
         <Outlet />
       </main>
     </div>

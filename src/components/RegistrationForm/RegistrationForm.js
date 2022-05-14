@@ -1,11 +1,10 @@
-import "./style.scss";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function AuthorizationForm() {
+export function RegistrationForm() {
+  const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  let navigate = useNavigate();
 
   const postHandler = (e) => {
     e.preventDefault();
@@ -19,10 +18,16 @@ export function AuthorizationForm() {
       }),
     };
 
-    fetch("/api/login", formData)
-      .then((resp) => resp.json())
+    fetch("/api/register", formData)
+      .then((res) => res.json())
       .then((data) => {
-        if (data.response === "y") navigate("/");
+        if (data.response === "y") {
+          fetch("/api/login", formData)
+            .then((logRes) => logRes.json())
+            .then((logData) => {
+              if (logData.response === "y") navigate("/");
+            });
+        }
       });
   };
 
@@ -47,10 +52,7 @@ export function AuthorizationForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
-        <Link to="/registration" className="m-t-10 text-align-center">
-          Registration
-        </Link>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

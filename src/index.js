@@ -5,6 +5,9 @@ import App from "./App";
 import { TrainingPage } from "./components/TrainingPage/TrainingPage";
 import { LearnWords } from "./components/Trainings/LearnWords/LearnWords";
 import { AuthorizationForm } from "./components/AuthorizationForm/AuthorizationForm";
+import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
+
+// TODO: Add a way to add words to dictionary
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,7 +18,12 @@ root.render(
           <Route path="training" element={<TrainingPage />} />
           <Route path="/training/learn-words" element={<LearnWords />} />
         </Route>
-        <Route path="/login" element={<AuthorizationForm />} />
+        {sessionStorage.getItem("isLoggedIn") === "n" && (
+          <Route path="/login" element={<AuthorizationForm />} />
+        )}
+        {sessionStorage.getItem("isLoggedIn") === "n" && (
+          <Route path="/registration" element={<RegistrationForm />} />
+        )}
       </Routes>
     </div>
   </BrowserRouter>

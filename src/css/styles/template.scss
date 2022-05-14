@@ -2,7 +2,12 @@
 
 @each $name, $width in var.$container-width {
   .container-#{$name} {
+    display: flex;
     width: $width;
     padding: 50px 25px;
+
+    @media screen and (max-width: $width) {
+      width: 100%;
+    }
   }
 }

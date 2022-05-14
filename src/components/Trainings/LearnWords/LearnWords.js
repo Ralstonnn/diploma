@@ -44,7 +44,7 @@ export function LearnWords() {
   };
 
   return (
-    <div className="container-1344 flex flex-a-center">
+    <div className="flex flex-a-center flex-item m-t-20">
       {word === "" ? (
         ""
       ) : (

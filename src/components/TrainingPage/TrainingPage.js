@@ -7,7 +7,7 @@ import "./style.scss";
 
 function TrainingPage() {
   return (
-    <div className="flex flex-gap-3 flex-wrap container-1344">
+    <div className="flex flex-gap-3 flex-wrap flex-item">
       {/* <h1 className="ml-4 mt-4">Training page</h1> */}
       <TrainingButton text="Learn" href="/training/learn-words" />
       <TrainingButton text="Repeat" href="*" />
