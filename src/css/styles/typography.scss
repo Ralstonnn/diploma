@@ -1,4 +1,5 @@
 @use "variables" as var;
+@use "sass:map";
 
 // INDENTS
 @each $name, $ind in var.$indents {
@@ -69,6 +70,7 @@ button,
   padding: 20px 40px;
   border: 1px solid black;
   border-radius: 2px;
+  border-color: map.get(var.$colors, "main-sd");
   text-decoration: none;
   color: black;
   font-size: 1em;
@@ -89,6 +91,12 @@ button,
 // BORDERS
 .border-round-tiny {
   border-radius: 2px;
+}
+
+@each $name, $value in var.$colors {
+  .border-color-#{$name} {
+    border-color: $value;
+  }
 }
 
 // FONTS

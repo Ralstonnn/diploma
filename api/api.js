@@ -21,12 +21,47 @@ app.use(
   })
 );
 
+// TODO: add error handling
 app.post("/api/get-words", (req, resp) => {
   con.query(
-    `select w.word, w.definition from words w inner join user u on w.user_id = u.id where u.login = '${req.session.login}'`,
+    `select w.word, w.definition from words w inner join user u on w.user_id = u.id where u.login = '${req.session.login}' and w.to_learn = 1`,
     (err, res) => {
       if (err) throw err;
       resp.json(res);
+    }
+  );
+});
+
+app.post("/api/add-words", (req, resp) => {
+  con.query(
+    `select id from user where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      let user_id = res[0].id;
+
+      con.query(
+        `select word from words where word = '${req.body.word}' and user_id = ${user_id}`,
+        (err, res) => {
+          if (err) throw err;
+
+          if (res.length === 0)
+            con.query(
+              `insert into words (word, definition, user_id) value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
+              (err) => {
+                if (err) throw err;
+                resp.json({ response: "y", value: "add" });
+              }
+            );
+          else
+            con.query(
+              `update words set word='${req.body.word}', definition='${req.body.definition}' where user_id = ${user_id}`,
+              (err) => {
+                if (err) throw err;
+                resp.json({ response: "y", value: "update" });
+              }
+            );
+        }
+      );
     }
   );
 });

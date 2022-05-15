@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export function RegistrationForm() {
   const navigate = useNavigate();
@@ -53,6 +53,9 @@ export function RegistrationForm() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Register</button>
+        <Link to="/login" className="m-t-10 text-align-center">
+          Login
+        </Link>
       </form>
     </div>
   );
