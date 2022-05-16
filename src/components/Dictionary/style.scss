@@ -1,0 +1,9 @@
+.component-dictionary {
+  .dictionary-item {
+    width: 600px;
+
+    & ~ .dictionary-item {
+      margin-top: 20px;
+    }
+  }
+}

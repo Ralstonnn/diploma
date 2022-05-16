@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TrainingCard } from "../../TrainingCard";
+import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
+import { SetDateToRepeat } from "../../../Functions/LearningCurve";
 
 export function LearnWords() {
+  const navigate = useNavigate();
   const [wordsDefs, setWordsDefs] = useState(null);
   const [word, setWord] = useState("");
   const [definition, setDefinition] = useState("");
   const [index, setIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const formData = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    };
-
-    fetch("/api/get-words", formData)
+    fetch("/api/learn-words")
       .then((resp) => resp.json())
       .then((data) => {
+        if (data.length === 0) {
+          alert("There is no words to learn");
+          return navigate("/training");
+        }
+
         setWordsDefs(data);
         setWord(data[index].word);
         setDefinition(data[index].definition);
+        setIsLoading(false);
       });
   }, []);
 
@@ -38,26 +44,36 @@ export function LearnWords() {
     }
   };
 
-  // TODO: Create callback to finish a training
   const finishCallback = () => {
-    fetch("/api/finish-training");
+    let result = SetDateToRepeat(wordsDefs);
+
+    const formData = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        result,
+      }),
+    };
+
+    fetch("/api/finish-training", formData)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.response === "y") navigate("/training");
+      });
   };
 
+  if (isLoading) return <LoadingAnimation />;
   return (
     <div className="flex flex-a-center flex-item m-t-20">
-      {word === "" ? (
-        ""
-      ) : (
-        <TrainingCard
-          word={word}
-          definition={definition}
-          prevCallback={clickPrev}
-          nextCallback={clickNext}
-          finishCallback={finishCallback}
-          index={index}
-          maxIndex={wordsDefs.length - 1}
-        />
-      )}
+      <TrainingCard
+        word={word}
+        definition={definition}
+        prevCallback={clickPrev}
+        nextCallback={clickNext}
+        finishCallback={finishCallback}
+        index={index}
+        maxIndex={wordsDefs.length - 1}
+      />
     </div>
   );
 }

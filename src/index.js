@@ -8,6 +8,7 @@ import { AuthorizationForm } from "./components/AuthorizationForm/AuthorizationF
 import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
 import { Dictionary } from "./components/Dictionary/Dictionary";
 import { AddWords } from "./components/AddWords/AddWords";
+import { RepeatWords } from "./components/Trainings/RepeatWords/RepeatWords";
 
 // TODO: Add a way to add words to dictionary
 
@@ -20,6 +21,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="training" element={<TrainingPage />} />
           <Route path="/training/learn-words" element={<LearnWords />} />
+          <Route path="/training/repeat-words" element={<RepeatWords />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/add-words" element={<AddWords />} />
         </Route>

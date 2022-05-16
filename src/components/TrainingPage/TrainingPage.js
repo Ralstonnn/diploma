@@ -10,7 +10,7 @@ function TrainingPage() {
   return (
     <div className="flex flex-gap-3 flex-wrap flex-item">
       <TrainingButton text="Learn" href="/training/learn-words" />
-      <TrainingButton text="Repeat" href="*" />
+      <TrainingButton text="Repeat" href="/training/repeat-words" />
     </div>
   );
 }

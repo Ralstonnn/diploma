@@ -31,10 +31,10 @@ export function AddWords() {
   };
 
   return (
-    <div className="flex-item flex flex-j-center component-add-words">
+    <div className="flex-item flex flex-j-center flex-a-center component-add-words">
       <form
         onSubmit={postHandler}
-        className="flex flex-o-vertical p-40 border-round-tiny border-color-main-sd"
+        className="flex flex-o-vertical p-40 border-round-tiny border-color-main-sd m-b-100"
       >
         <input
           className="border-round-tiny"
