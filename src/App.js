@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import { LoadingPage } from "./components/LoadingPage/LoadingPage";
+import { AddWords } from "./components/AddWords/AddWords";
 import "./css/App.css";
 import "./css/CommonClasses.css";
 import "./css/styles/flex.scss";
@@ -48,6 +49,8 @@ function MainPage() {
       <main className="container-1344 flex">
         <Outlet />
       </main>
+
+      {/* <AddWords style={{ display: "none" }} /> */}
     </div>
   );
 }
