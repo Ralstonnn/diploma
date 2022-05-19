@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCardLearnWords } from "../../TrainingCard";
+import { TrainingCardLearnWords } from "../../TrainingCards";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 import { SetDateToRepeat } from "../../../Functions/LearningCurve";
 
@@ -55,7 +55,7 @@ export function LearnWords() {
       }),
     };
 
-    fetch("/api/finish-training", formData)
+    fetch("/api/finish-learn-training", formData)
       .then((res) => res.json())
       .then((data) => {
         if (data.response === "y") navigate("/training");

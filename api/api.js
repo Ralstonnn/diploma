@@ -55,6 +55,54 @@ app.get("/api/repeat-words", (req, resp) => {
   );
 });
 
+app.post("/api/set-to-learn", (req, resp) => {
+  con.query(
+    `select id from user where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      let user_id = res[0].id;
+
+      con.query(
+        `update words set to_learn = 1, repeat_counter = 1 where word='${req.body.word}' and definition='${req.body.definition}' and user_id=${user_id} `,
+        (err) => {
+          if (err) throw err;
+          resp.json({ response: "y" });
+        }
+      );
+    }
+  );
+});
+
+app.post("/api/set-reprat-date", (req, resp) => {
+  con.query(
+    `select id from user where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      let user_id = res[0].id;
+
+      if (req.body.increaseRepeatCounter) {
+        con.query(
+          `update words set time_before_repeat = '${req.body.date}', repeat_counter = repeat_counter+1 where word='${req.body.word}' and definition='${req.body.definition}' and user_id=${user_id} `,
+          (err) => {
+            if (err) throw err;
+            resp.json({ response: "y" });
+          }
+        );
+
+        return;
+      }
+
+      con.query(
+        `update words set time_before_repeat = '${req.body.date}', repeat_counter = 1 where word='${req.body.word}' and definition='${req.body.definition}' and user_id=${user_id} `,
+        (err) => {
+          if (err) throw err;
+          resp.json({ response: "y" });
+        }
+      );
+    }
+  );
+});
+
 app.post("/api/add-words", (req, resp) => {
   con.query(
     `select id from user where login='${req.session.login}'`,
@@ -107,8 +155,7 @@ app.post("/api/delete-word", (req, resp) => {
   );
 });
 
-// TODO: Write code to finish a training
-app.post("/api/finish-training", (req, resp) => {
+app.post("/api/finish-learn-training", (req, resp) => {
   con.query(
     `select id from user where login='${req.session.login}'`,
     (err, res) => {
@@ -117,7 +164,7 @@ app.post("/api/finish-training", (req, resp) => {
 
       req.body.result.forEach((item) => {
         con.query(
-          `update words set time_before_repeat='${item.time_before_repeat}', repeat_counter=${item.repeat_counter}, to_learn=0 where word='${item.word}' and user_id = ${user_id}`,
+          `update words set time_before_repeat='${item.time_before_repeat}', to_learn=0 where word='${item.word}' and user_id = ${user_id}`,
           (err) => {
             if (err) throw err;
           }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCardRepeatWords } from "../../TrainingCard";
+import { TrainingCardRepeatWords } from "../../TrainingCards";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 import { SetDateToRepeat } from "../../../Functions/LearningCurve";
 
@@ -12,6 +12,7 @@ export function RepeatWords() {
   const [definition, setDefinition] = useState("");
   const [index, setIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [repeatCounter, setRepeatCounter] = useState(0);
 
   useEffect(() => {
     fetch("/api/repeat-words")
@@ -25,6 +26,7 @@ export function RepeatWords() {
         setWordsDefs(data);
         setWord(data[index].word);
         setDefinition(data[index].definition);
+        setRepeatCounter(data[index].repeat_counter);
         setIsLoading(false);
       });
   }, []);
@@ -32,35 +34,10 @@ export function RepeatWords() {
   const clickNext = () => {
     if (index < wordsDefs.length - 1) {
       setWord(wordsDefs[index + 1].word);
+      setRepeatCounter(wordsDefs[index + 1].repeat_counter);
       setDefinition(wordsDefs[index + 1].definition);
       setIndex(index + 1);
     }
-  };
-
-  const clickPrev = () => {
-    if (index > 0) {
-      setWord(wordsDefs[index - 1].word);
-      setDefinition(wordsDefs[index - 1].definition);
-      setIndex(index - 1);
-    }
-  };
-
-  const finishCallback = () => {
-    let result = SetDateToRepeat(wordsDefs);
-
-    const formData = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        result,
-      }),
-    };
-
-    fetch("/api/finish-training", formData)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.response === "y") navigate("/training");
-      });
   };
 
   if (isLoading) return <LoadingAnimation />;
@@ -70,9 +47,8 @@ export function RepeatWords() {
       <TrainingCardRepeatWords
         word={word}
         definition={definition}
-        prevCallback={clickPrev}
         nextCallback={clickNext}
-        finishCallback={finishCallback}
+        repeatCounter={repeatCounter}
         index={index}
         maxIndex={wordsDefs.length - 1}
       />
