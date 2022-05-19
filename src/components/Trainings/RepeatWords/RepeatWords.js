@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCard } from "../../TrainingCard";
+import { TrainingCardRepeatWords } from "../../TrainingCard";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 import { SetDateToRepeat } from "../../../Functions/LearningCurve";
 
@@ -67,7 +67,7 @@ export function RepeatWords() {
 
   return (
     <div className="flex flex-a-center flex-item m-t-20">
-      <TrainingCard
+      <TrainingCardRepeatWords
         word={word}
         definition={definition}
         prevCallback={clickPrev}
