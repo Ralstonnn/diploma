@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCardLearnWords } from "../../TrainingCards";
+import { TrainingCardLearnWords } from "../../TrainingCards/TrainingCards";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 import { SetDateToRepeat } from "../../../Functions/LearningCurve";
 

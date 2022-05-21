@@ -1,8 +1,18 @@
 @use "../../css/styles/variables.scss" as var;
 @use "sass:map";
+$component: "auth-form";
 
-.auth-form-wrapper {
+.#{$component}-wrapper {
   width: 100vw !important;
   height: 100vh !important;
-  background-color: map.get(var.$colors, "main-sd");
+}
+
+.#{$component} {
+  width: 385px;
+  height: 400px;
+}
+
+.#{$component} > input {
+  height: 50px;
+  font-size: 1.2rem;
 }

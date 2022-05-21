@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCardRepeatWords } from "../../TrainingCards";
+import { TrainingCardRepeatWords } from "../../TrainingCards/TrainingCards";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 
 // TODO: Make training to repeat words

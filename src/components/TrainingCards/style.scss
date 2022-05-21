@@ -1,0 +1,15 @@
+$component: "training-card";
+
+.#{$component} {
+  width: 700px;
+  height: 600px;
+  border-radius: 2px;
+}
+
+.#{$component}-word {
+  font-size: 2.5rem;
+}
+
+.#{$component}-definition {
+  font-size: 2rem;
+}

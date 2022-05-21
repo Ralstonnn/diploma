@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./style.scss";
 
-export function AddWords() {
+export function AddWords({ closeBtnClick }) {
   const [word, setWord] = useState("");
   const [definition, setDefinition] = useState("");
 
@@ -32,12 +32,14 @@ export function AddWords() {
 
   return (
     <div className="flex-item flex flex-j-center flex-a-center component-add-words">
+      <div className="add-word-bg"></div>
       <form
         onSubmit={postHandler}
-        className="flex flex-o-vertical p-40 border-round-tiny border-color-main-sd m-b-100"
+        className="flex flex-o-vertical p-40 border-round-tiny border-color-main-sd m-b-100 bg-prm"
       >
+        <div className="addWords-close-btn" onClick={closeBtnClick}></div>
         <input
-          className="border-round-tiny"
+          className="add-word-word-input border-round-tiny"
           type="text"
           placeholder="Enter word"
           required
@@ -45,13 +47,16 @@ export function AddWords() {
           onChange={(e) => setWord(e.target.value)}
         />
         <textarea
-          className="m-t-20 border-round-tiny"
+          className="add-word-definition-input m-t-20 border-round-tiny"
           placeholder="Enter definition"
           required
           value={definition}
           onChange={(e) => setDefinition(e.target.value)}
         />
-        <button className="m-t-20 border-round-tiny" type="submit">
+        <button
+          className="m-t-20 bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+          type="submit"
+        >
           Add
         </button>
       </form>

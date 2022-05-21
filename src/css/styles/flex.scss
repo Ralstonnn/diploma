@@ -33,17 +33,23 @@
     &-space-between {
       justify-content: space-between;
     }
+
+    &-space-evenly {
+      justify-content: space-evenly;
+    }
   }
 
   &.flex-o {
     &-vertical {
       flex-direction: column;
+
       &-reverse {
         flex-direction: column-reverse;
       }
     }
     &-horizontal {
       flex-direction: row;
+
       &-reverse {
         flex-direction: row-reverse;
       }

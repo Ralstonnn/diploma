@@ -17,7 +17,10 @@ function TrainingPage() {
 
 function TrainingButton({ href, text }) {
   return (
-    <Link to={href} className="btn training-btn">
+    <Link
+      to={href}
+      className="btn training-btn bg-prm-d bg-prm-hover text-color-main-b text-color-main-d-hover"
+    >
       {text}
     </Link>
   );

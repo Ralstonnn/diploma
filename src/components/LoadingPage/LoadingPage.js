@@ -3,7 +3,7 @@ import "./style.scss";
 
 export function LoadingPage() {
   return (
-    <div className="loading-page-wrapper bg-main-sd">
+    <div className="loading-page-wrapper">
       <LoadingAnimation />
     </div>
   );

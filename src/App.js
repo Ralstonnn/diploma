@@ -43,14 +43,22 @@ function App() {
 }
 
 function MainPage() {
+  const [showAddWords, setShowAddWords] = useState(false);
+
   return (
     <div className="outer-container">
-      <Header />
+      <Header setShowAddWords={(value) => setShowAddWords(value)} />
       <main className="container-1344 flex">
         <Outlet />
       </main>
 
-      {/* <AddWords style={{ display: "none" }} /> */}
+      {showAddWords && (
+        <AddWords
+          closeBtnClick={() => {
+            setShowAddWords(false);
+          }}
+        />
+      )}
     </div>
   );
 }

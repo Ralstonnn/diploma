@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoadingAnimation } from "./LoadingAnimation/LoadingAnimation";
-import { repeatCoefficient } from "../globalVariables";
+import { LoadingAnimation } from "../LoadingAnimation/LoadingAnimation";
+import { repeatCoefficient } from "../../globalVariables";
+import "./style.scss";
 
-// TODO: Refactor training card the way that it'll be base for all the others trainings
+// TODO: Write click next and click previous inside the card
+// TODO: Pass all the words and definition it'll help to reduce loading time
+// TODO: Fix blinking on next and previous clicks
+
 function TrainingCardLearnWords({
   word,
   definition,
@@ -15,15 +19,36 @@ function TrainingCardLearnWords({
 }) {
   return (
     <div className="flex flex-j-center flex-item">
-      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50">
-        <div className="h1">{word}</div>
-        <div className="flex flex-grow-1 m-t-30 definition">{definition}</div>
+      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50 bg-prm">
+        <div className="training-card-word">{word}</div>
+        <div className="training-card-definition flex flex-grow-1 m-t-30">
+          {definition}
+        </div>
         <div className="flex flex-item flex-j-space-between m-t-30">
-          {index > 0 && <button onClick={prevCallback}>Previous</button>}
+          {index > 0 && (
+            <button
+              onClick={prevCallback}
+              className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            >
+              Previous
+            </button>
+          )}
           <div className="flex-item"></div>
-          {index < maxIndex && <button onClick={nextCallback}>Next</button>}
+          {index < maxIndex && (
+            <button
+              onClick={nextCallback}
+              className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            >
+              Next
+            </button>
+          )}
           {index === maxIndex && (
-            <button onClick={finishCallback}>Finish</button>
+            <button
+              onClick={finishCallback}
+              className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            >
+              Finish
+            </button>
           )}
         </div>
       </div>
@@ -43,11 +68,12 @@ function TrainingCardRepeatWords({
   const [showAnswer, setShowAnswer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [buttons, setButtons] = useState(
-    <div className="flex flex-item flex-j-center m-t-30">
+    <div className="flex flex-item flex-j-center m-t-30 ">
       <button
         onClick={() => {
           setShowAnswer(true);
         }}
+        className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
       >
         Show Answer
       </button>
@@ -145,13 +171,22 @@ function TrainingCardRepeatWords({
     if (showAnswer) {
       setButtons(
         <div className="flex flex-item flex-j-space-between m-t-30">
-          <button className="bg-btn-r" onClick={clickAgain}>
+          <button
+            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            onClick={clickAgain}
+          >
             Again
           </button>
-          <button className="bg-btn-y" onClick={clickHard}>
+          <button
+            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            onClick={clickHard}
+          >
             Hard
           </button>
-          <button className="bg-btn-g" onClick={clickEasy}>
+          <button
+            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            onClick={clickEasy}
+          >
             Easy
           </button>
         </div>
@@ -163,10 +198,12 @@ function TrainingCardRepeatWords({
 
   return (
     <div className="flex flex-j-center flex-item">
-      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50">
-        <div className="h1">{word}</div>
+      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50 bg-prm">
+        <div className="training-card-word">{word}</div>
         {showAnswer && (
-          <div className="flex flex-grow-1 m-t-30 definition">{definition}</div>
+          <div className="training-card-definition flex flex-grow-1 m-t-30">
+            {definition}
+          </div>
         )}
         {buttons}
       </div>

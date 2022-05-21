@@ -29,7 +29,7 @@ export function AuthorizationForm() {
   return (
     <div className="auth-form-wrapper flex flex-a-center flex-j-center">
       <form
-        className="flex flex-o-vertical p-40 bg-main-b border-round-tiny"
+        className="auth-form flex flex-o-vertical p-40 border-round-tiny bg-prm flex-j-space-evenly"
         onSubmit={postHandler}
       >
         <input
@@ -47,10 +47,17 @@ export function AuthorizationForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
-        <Link to="/registration" className="m-t-10 text-align-center">
-          Registration
-        </Link>
+        <div className="flex flex-o-vertical">
+          <button
+            type="submit"
+            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+          >
+            Login
+          </button>
+          <Link to="/registration" className="m-t-10 text-align-center">
+            Registration
+          </Link>
+        </div>
       </form>
     </div>
   );

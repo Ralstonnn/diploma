@@ -34,7 +34,7 @@ export function RegistrationForm() {
   return (
     <div className="auth-form-wrapper flex flex-a-center flex-j-center">
       <form
-        className="flex flex-o-vertical p-40 bg-main-b border-round-tiny"
+        className="auth-form flex flex-o-vertical p-40 border-round-tiny bg-prm flex-j-space-evenly"
         onSubmit={postHandler}
       >
         <input
@@ -52,10 +52,17 @@ export function RegistrationForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Register</button>
-        <Link to="/login" className="m-t-10 text-align-center">
-          Login
-        </Link>
+        <div className="flex flex-o-vertical">
+          <button
+            type="submit"
+            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+          >
+            Registration
+          </button>
+          <Link to="/login" className="m-t-10 text-align-center">
+            Login
+          </Link>
+        </div>
       </form>
     </div>
   );

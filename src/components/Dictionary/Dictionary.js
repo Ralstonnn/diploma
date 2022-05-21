@@ -49,14 +49,14 @@ function Item({ word, definition }) {
   };
 
   return (
-    <div className="flex flex-j-space-between border-round-tiny bg-main-sd text-color-main-b p-20 dictionary-item">
+    <div className="flex flex-j-space-between flex-a-center border-round-tiny bg-prm text-color-main-d text-color-main-b p-20 dictionary-item">
       <div>
         <h2>Word: {word}</h2>
         <div className="m-t-10">Definition: {definition}</div>
       </div>
       <form onSubmit={postHandler}>
         <button
-          className="btn-hover-ntr-sd text-color-hover-main-b"
+          className="dictionary-delete-btn bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
           type="submit"
         >
           Delete
