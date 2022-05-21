@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TrainingCardRepeatWords } from "../../TrainingCards";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
-import { SetDateToRepeat } from "../../../Functions/LearningCurve";
 
 // TODO: Make training to repeat words
 export function RepeatWords() {
@@ -29,7 +28,7 @@ export function RepeatWords() {
         setRepeatCounter(data[index].repeat_counter);
         setIsLoading(false);
       });
-  }, []);
+  }, [index, navigate]);
 
   const clickNext = () => {
     if (index < wordsDefs.length - 1) {

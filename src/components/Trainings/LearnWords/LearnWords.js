@@ -26,7 +26,7 @@ export function LearnWords() {
         setDefinition(data[index].definition);
         setIsLoading(false);
       });
-  }, []);
+  }, [index, navigate]);
 
   const clickNext = () => {
     if (index < wordsDefs.length - 1) {

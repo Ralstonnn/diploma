@@ -36,7 +36,7 @@ function LoginRoutes() {
 
   useEffect(() => {
     setIsLoggedIn(sessionStorage.getItem("isLoggedIn") === "y");
-  });
+  }, []);
 
   if (!isLoggedIn) {
     return (

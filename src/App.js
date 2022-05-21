@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Header } from "./components/Header/Header";
 import { LoadingPage } from "./components/LoadingPage/LoadingPage";
@@ -14,7 +14,7 @@ function App() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  function checkIfLoggedIn() {
+  const checkIfLoggedIn = useCallback(() => {
     fetch("/api/is-logged-in", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -30,13 +30,13 @@ function App() {
           setIsLoading(false);
         }
       });
-  }
+  }, [navigate]);
 
   useEffect(() => {
     sessionStorage.setItem("isLoading", "y");
     sessionStorage.setItem("isLoggedIn", "n");
     checkIfLoggedIn();
-  }, []);
+  }, [checkIfLoggedIn]);
 
   if (!isLoading) return <MainPage />;
   return <LoadingPage />;
