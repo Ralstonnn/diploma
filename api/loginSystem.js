@@ -23,10 +23,17 @@ module.exports = {
   },
   register: function (req, resp) {
     con.query(
-      `insert into users (login, password) value ('${req.body.login}', 
-      '${req.body.password}')`
+      `insert into users (login, password) value 
+      ('${req.body.login}', '${req.body.password}')`,
+      (err) => {
+        if (err) {
+          resp.json({ response: "n" });
+          return null;
+        }
+
+        resp.json({ response: "y" });
+      }
     );
-    resp.json({ response: "y" });
   },
   isLoggedIn: function (req, resp) {
     if (req.session.loggedIn) {
