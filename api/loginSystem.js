@@ -3,7 +3,8 @@ const { con } = require("./DbHandler");
 module.exports = {
   login: function (req, resp) {
     con.query(
-      `select password from users where login = "${req.body.login.toLowerCase()}"`,
+      `select password from users where 
+      login = "${req.body.login.toLowerCase()}"`,
       (err, res) => {
         if (err) throw err;
         if (res.length === 0) {
@@ -22,7 +23,8 @@ module.exports = {
   },
   register: function (req, resp) {
     con.query(
-      `insert into users (login, password) value ('${req.body.login}', '${req.body.password}')`
+      `insert into users (login, password) value ('${req.body.login}', 
+      '${req.body.password}')`
     );
     resp.json({ response: "y" });
   },

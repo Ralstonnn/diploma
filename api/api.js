@@ -168,8 +168,9 @@ app.post("/api/finish-learn-training", (req, resp) => {
 
       req.body.result.forEach((item) => {
         con.query(
-          `update dictionary set time_before_repeat='${item.time_before_repeat}', 
-          to_learn=0 where word='${item.word}' and user_id = ${user_id}`,
+          `update dictionary set 
+          time_before_repeat='${item.time_before_repeat}', to_learn=0 
+          where word='${item.word}' and user_id = ${user_id}`,
           (err) => {
             if (err) throw err;
           }
