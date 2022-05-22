@@ -24,8 +24,7 @@ export function AddWords({ closeBtnClick }) {
           setWord("");
           setDefinition("");
 
-          if (data.value === "add") alert("Word added");
-          else if (data.value === "update") alert("Word updated");
+          if (data.response === "y") alert("Word added");
         }
       });
   };

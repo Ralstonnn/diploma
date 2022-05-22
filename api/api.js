@@ -119,21 +119,12 @@ app.post("/api/add-words", (req, resp) => {
     (err, res) => {
       if (err) throw err;
       let user_id = res[0].id;
-
       con.query(
-        `select word from dictionary where word = '${req.body.word}' 
-        and user_id = ${user_id}`,
+        `insert into dictionary (word, definition, user_id) 
+            value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
         (err) => {
           if (err) throw err;
-
-          con.query(
-            `insert into dictionary (word, definition, user_id) 
-            value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
-            (err) => {
-              if (err) throw err;
-              resp.json({ response: "y", value: "add" });
-            }
-          );
+          resp.json({ response: "y" });
         }
       );
     }
@@ -159,6 +150,7 @@ app.post("/api/delete-word", (req, resp) => {
   );
 });
 
+// TODO: Figure out how to update all the words without putting query in a foreach
 app.post("/api/finish-learn-training", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
