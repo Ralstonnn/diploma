@@ -21,11 +21,12 @@ app.use(
   })
 );
 
+// TODO: Find out if its safe to pass an id from db to the component
 // TODO: add error handling
 app.get("/api/get-words", (req, resp) => {
   con.query(
-    `select w.word, w.definition from words w inner join user u on w.user_id = u.id 
-    where u.login = '${req.session.login}'`,
+    `select d.word, d.definition from dictionary d inner join users u 
+    on d.user_id = u.id where u.login = '${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       resp.json(res);
@@ -35,8 +36,9 @@ app.get("/api/get-words", (req, resp) => {
 
 app.get("/api/learn-words", (req, resp) => {
   con.query(
-    `select w.word, w.definition, time_before_repeat, repeat_counter from words w inner join user u on w.user_id = u.id 
-    where u.login = '${req.session.login}' and w.to_learn = 1`,
+    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    dictionary d inner join users u on d.user_id = u.id 
+    where u.login = '${req.session.login}' and d.to_learn = 1`,
     (err, res) => {
       if (err) throw err;
       resp.json(res);
@@ -46,8 +48,10 @@ app.get("/api/learn-words", (req, resp) => {
 
 app.get("/api/repeat-words", (req, resp) => {
   con.query(
-    `select w.word, w.definition, time_before_repeat, repeat_counter from words w inner join user u on w.user_id = u.id 
-    where u.login = '${req.session.login}' and w.to_learn = 0 and w.time_before_repeat <= curdate()`,
+    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    dictionary d inner join users u on d.user_id = u.id 
+    where u.login = '${req.session.login}' and d.to_learn = 0 and 
+    d.time_before_repeat <= curdate()`,
     (err, res) => {
       if (err) throw err;
       resp.json(res);
@@ -57,13 +61,15 @@ app.get("/api/repeat-words", (req, resp) => {
 
 app.post("/api/set-to-learn", (req, resp) => {
   con.query(
-    `select id from user where login='${req.session.login}'`,
+    `select id from users where login='${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       let user_id = res[0].id;
 
       con.query(
-        `update words set to_learn = 1, repeat_counter = 1 where word='${req.body.word}' and definition='${req.body.definition}' and user_id=${user_id} `,
+        `update dictionary set to_learn = 1, repeat_counter = 1 where 
+        word='${req.body.word}' and definition='${req.body.definition}' 
+        and user_id=${user_id} `,
         (err) => {
           if (err) throw err;
           resp.json({ response: "y" });
@@ -75,14 +81,16 @@ app.post("/api/set-to-learn", (req, resp) => {
 
 app.post("/api/set-reprat-date", (req, resp) => {
   con.query(
-    `select id from user where login='${req.session.login}'`,
+    `select id from users where login='${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       let user_id = res[0].id;
 
       if (req.body.increaseRepeatCounter) {
         con.query(
-          `update words set time_before_repeat = '${req.body.date}', repeat_counter = repeat_counter+1 where word='${req.body.word}' and definition='${req.body.definition}' and user_id=${user_id} `,
+          `update dictionary set time_before_repeat = '${req.body.date}', 
+          repeat_counter = repeat_counter+1 where word='${req.body.word}' 
+          and definition='${req.body.definition}' and user_id=${user_id} `,
           (err) => {
             if (err) throw err;
             resp.json({ response: "y" });
@@ -93,7 +101,9 @@ app.post("/api/set-reprat-date", (req, resp) => {
       }
 
       con.query(
-        `update words set time_before_repeat = '${req.body.date}', repeat_counter = 1 where word='${req.body.word}' and definition='${req.body.definition}' and user_id=${user_id} `,
+        `update dictionary set time_before_repeat = '${req.body.date}', 
+        repeat_counter = 1 where word='${req.body.word}' 
+        and definition='${req.body.definition}' and user_id=${user_id} `,
         (err) => {
           if (err) throw err;
           resp.json({ response: "y" });
@@ -105,18 +115,20 @@ app.post("/api/set-reprat-date", (req, resp) => {
 
 app.post("/api/add-words", (req, resp) => {
   con.query(
-    `select id from user where login='${req.session.login}'`,
+    `select id from users where login='${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       let user_id = res[0].id;
 
       con.query(
-        `select word from words where word = '${req.body.word}' and user_id = ${user_id}`,
+        `select word from dictionary where word = '${req.body.word}' 
+        and user_id = ${user_id}`,
         (err) => {
           if (err) throw err;
 
           con.query(
-            `insert into words (word, definition, user_id) value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
+            `insert into dictionary (word, definition, user_id) 
+            value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
             (err) => {
               if (err) throw err;
               resp.json({ response: "y", value: "add" });
@@ -130,13 +142,14 @@ app.post("/api/add-words", (req, resp) => {
 
 app.post("/api/delete-word", (req, resp) => {
   con.query(
-    `select id from user where login='${req.session.login}'`,
+    `select id from users where login='${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       let user_id = res[0].id;
 
       con.query(
-        `delete from words where user_id=${user_id} and word='${req.body.word}' and definition='${req.body.definition}'`,
+        `delete from dictionary where user_id=${user_id} and 
+        word='${req.body.word}' and definition='${req.body.definition}'`,
         (err) => {
           if (err) throw err;
           resp.json({ response: "y" });
@@ -148,14 +161,15 @@ app.post("/api/delete-word", (req, resp) => {
 
 app.post("/api/finish-learn-training", (req, resp) => {
   con.query(
-    `select id from user where login='${req.session.login}'`,
+    `select id from users where login='${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       let user_id = res[0].id;
 
       req.body.result.forEach((item) => {
         con.query(
-          `update words set time_before_repeat='${item.time_before_repeat}', to_learn=0 where word='${item.word}' and user_id = ${user_id}`,
+          `update dictionary set time_before_repeat='${item.time_before_repeat}', 
+          to_learn=0 where word='${item.word}' and user_id = ${user_id}`,
           (err) => {
             if (err) throw err;
           }

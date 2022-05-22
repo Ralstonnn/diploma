@@ -28,7 +28,7 @@ export function Dictionary() {
   }, []);
 
   return (
-    <div className="flex-item flex flex-o-vertical flex-a-center component-dictionary">
+    <div className="component-dictionary flex-item flex flex-o-vertical flex-a-center">
       {items}
     </div>
   );
