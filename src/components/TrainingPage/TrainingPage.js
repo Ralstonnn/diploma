@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import "../../css/CommonClasses.css";
 import "../../css/styles/template.scss";
 import "./style.scss";
-// import { renderIntoDocument } from "react-dom/test-utils";
 
+// TODO: Show definition and give couple words to choose
+// TODO: Show word and let the user to choose definition
+// TODO: Add training to check the word spelling
 function TrainingPage() {
-  // TODO: Make buttons unclickable if there is no data
-  // And add some alarm like "You havent added any words to learn or redirect to add words"
   return (
     <div className="flex flex-gap-3 flex-wrap flex-item">
       <TrainingButton text="Learn" href="/training/learn-words" />

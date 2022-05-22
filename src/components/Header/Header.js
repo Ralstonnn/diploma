@@ -19,7 +19,6 @@ export function Header({ setShowAddWords }) {
 
       <div className="flex-item"></div>
 
-      {/* TODO: Add ability to add words */}
       <div
         className="header-add-words-btn bg-prm-d bg-prm-hover p-40"
         onClick={() => setShowAddWords(true)}

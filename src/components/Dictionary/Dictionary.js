@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { LoadingAnimation } from "../LoadingAnimation/LoadingAnimation";
 import "./style.scss";
 
+// TODO: Make cards clickable
+
 export function Dictionary() {
   const [items, setItems] = useState(<LoadingAnimation />);
 
@@ -50,7 +52,7 @@ function Item({ word, definition }) {
 
   return (
     <div className="flex flex-j-space-between flex-a-center border-round-tiny bg-prm text-color-main-d text-color-main-b p-20 dictionary-item">
-      <div>
+      <div className="m-r-20">
         <h2>Word: {word}</h2>
         <div className="m-t-10">Definition: {definition}</div>
       </div>

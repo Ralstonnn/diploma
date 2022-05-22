@@ -12,22 +12,6 @@ export function LearnWords() {
   const [index, setIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("/api/learn-words")
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data.length === 0) {
-          alert("There is no words to learn");
-          return navigate("/training");
-        }
-
-        setWordsDefs(data);
-        setWord(data[index].word);
-        setDefinition(data[index].definition);
-        setIsLoading(false);
-      });
-  }, [index, navigate]);
-
   const clickNext = () => {
     if (index < wordsDefs.length - 1) {
       setWord(wordsDefs[index + 1].word);
@@ -61,6 +45,22 @@ export function LearnWords() {
         if (data.response === "y") navigate("/training");
       });
   };
+
+  useEffect(() => {
+    fetch("/api/learn-words")
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.length === 0) {
+          alert("There is no words to learn");
+          return navigate("/training");
+        }
+
+        setWordsDefs(data);
+        setWord(data[index].word);
+        setDefinition(data[index].definition);
+        setIsLoading(false);
+      });
+  }, []);
 
   if (isLoading) return <LoadingAnimation />;
   return (

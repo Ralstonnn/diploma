@@ -10,7 +10,6 @@ import "./css/styles/typography.scss";
 import "./css/styles/template.scss";
 
 function App() {
-  // TODO: figure out how to update component
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 

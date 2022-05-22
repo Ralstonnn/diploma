@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { TrainingCardRepeatWords } from "../../TrainingCards/TrainingCards";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 
-// TODO: Make training to repeat words
 export function RepeatWords() {
   const navigate = useNavigate();
   const [wordsDefs, setWordsDefs] = useState(null);
@@ -12,6 +11,15 @@ export function RepeatWords() {
   const [index, setIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [repeatCounter, setRepeatCounter] = useState(0);
+
+  const clickNext = () => {
+    if (index < wordsDefs.length - 1) {
+      setWord(wordsDefs[index + 1].word);
+      setRepeatCounter(wordsDefs[index + 1].repeat_counter);
+      setDefinition(wordsDefs[index + 1].definition);
+      setIndex(index + 1);
+    }
+  };
 
   useEffect(() => {
     fetch("/api/repeat-words")
@@ -28,16 +36,7 @@ export function RepeatWords() {
         setRepeatCounter(data[index].repeat_counter);
         setIsLoading(false);
       });
-  }, [index, navigate]);
-
-  const clickNext = () => {
-    if (index < wordsDefs.length - 1) {
-      setWord(wordsDefs[index + 1].word);
-      setRepeatCounter(wordsDefs[index + 1].repeat_counter);
-      setDefinition(wordsDefs[index + 1].definition);
-      setIndex(index + 1);
-    }
-  };
+  }, []);
 
   if (isLoading) return <LoadingAnimation />;
 

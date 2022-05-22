@@ -10,8 +10,6 @@ import { Dictionary } from "./components/Dictionary/Dictionary";
 import { AddWords } from "./components/AddWords/AddWords";
 import { RepeatWords } from "./components/Trainings/RepeatWords/RepeatWords";
 
-// TODO: Add a way to add words to dictionary
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -23,7 +21,6 @@ root.render(
           <Route path="/training/learn-words" element={<LearnWords />} />
           <Route path="/training/repeat-words" element={<RepeatWords />} />
           <Route path="/dictionary" element={<Dictionary />} />
-          <Route path="/add-words" element={<AddWords />} />
         </Route>
       </Routes>
       <LoginRoutes />

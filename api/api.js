@@ -112,25 +112,16 @@ app.post("/api/add-words", (req, resp) => {
 
       con.query(
         `select word from words where word = '${req.body.word}' and user_id = ${user_id}`,
-        (err, res) => {
+        (err) => {
           if (err) throw err;
 
-          if (res.length === 0)
-            con.query(
-              `insert into words (word, definition, user_id) value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
-              (err) => {
-                if (err) throw err;
-                resp.json({ response: "y", value: "add" });
-              }
-            );
-          else
-            con.query(
-              `update words set word='${req.body.word}', definition='${req.body.definition}' where user_id = ${user_id}`,
-              (err) => {
-                if (err) throw err;
-                resp.json({ response: "y", value: "update" });
-              }
-            );
+          con.query(
+            `insert into words (word, definition, user_id) value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
+            (err) => {
+              if (err) throw err;
+              resp.json({ response: "y", value: "add" });
+            }
+          );
         }
       );
     }
