@@ -30,11 +30,15 @@ export function AddWords({ closeBtnClick }) {
   };
 
   return (
-    <div className="flex-item flex flex-j-center flex-a-center component-add-words">
+    <div
+      className="component-add-words flex-item flex 
+                flex-j-center flex-a-center"
+    >
       <div className="add-word-bg"></div>
       <form
         onSubmit={postHandler}
-        className="flex flex-o-vertical p-40 border-round-tiny border-color-main-sd m-b-100 bg-prm"
+        className="flex flex-o-vertical p-40 border-round-tiny 
+                  border-color-main-sd m-b-100 bg-prm"
       >
         <div className="addWords-close-btn" onClick={closeBtnClick}></div>
         <input
@@ -53,7 +57,8 @@ export function AddWords({ closeBtnClick }) {
           onChange={(e) => setDefinition(e.target.value)}
         />
         <button
-          className="m-t-20 bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+          className="m-t-20 bg-prm-d bg-prm-b-hover text-color-main-b 
+                    text-color-main-d-hover"
           type="submit"
         >
           Add

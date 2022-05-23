@@ -1,7 +1,6 @@
 @use "variables" as var;
 @use "sass:map";
 
-// INDENTS
 @each $name, $ind in var.$indents {
   .p-#{$name} {
     padding: $ind;
@@ -49,6 +48,30 @@
   }
   .m-l-#{$name} {
     margin-left: $ind;
+  }
+
+  .m-ng-#{$name} {
+    margin: -$ind;
+  }
+  .m-ng-v-#{$name} {
+    margin-top: -$ind;
+    margin-bottom: -$ind;
+  }
+  .m-ng-h-#{$name} {
+    margin-left: -$ind;
+    margin-right: -$ind;
+  }
+  .m-ng-t-#{$name} {
+    margin-top: -$ind;
+  }
+  .m-ng-b-#{$name} {
+    margin-bottom: -$ind;
+  }
+  .m-ng-r-#{$name} {
+    margin-right: -$ind;
+  }
+  .m-ng-l-#{$name} {
+    margin-left: -$ind;
   }
 }
 

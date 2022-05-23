@@ -45,20 +45,22 @@ function Item({ word, definition }) {
       }),
     };
 
-    fetch("/api/delete-word", formData)
-      .then((resp) => resp.json())
-      .then((data) => {});
+    fetch("/api/delete-word", formData);
   };
 
   return (
-    <div className="flex flex-j-space-between flex-a-center border-round-tiny bg-prm text-color-main-d text-color-main-b p-20 dictionary-item">
+    <div
+      className="dictionary-item flex flex-j-space-between flex-a-center 
+      border-round-tiny bg-prm text-color-main-d p-20"
+    >
       <div className="m-r-20">
         <h2>Word: {word}</h2>
         <div className="m-t-10">Definition: {definition}</div>
       </div>
       <form onSubmit={postHandler}>
         <button
-          className="dictionary-delete-btn bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+          className="dictionary-delete-btn bg-prm-d bg-prm-b-hover 
+          text-color-main-b text-color-main-d-hover"
           type="submit"
         >
           Delete

@@ -7,7 +7,6 @@ import { LearnWords } from "./components/Trainings/LearnWords/LearnWords";
 import { AuthorizationForm } from "./components/AuthorizationForm/AuthorizationForm";
 import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
 import { Dictionary } from "./components/Dictionary/Dictionary";
-import { AddWords } from "./components/AddWords/AddWords";
 import { RepeatWords } from "./components/Trainings/RepeatWords/RepeatWords";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
