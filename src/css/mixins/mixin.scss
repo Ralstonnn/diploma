@@ -1,0 +1,36 @@
+@mixin bgColorSet($colorName) {
+  background-color: map.get($colors, $colorName);
+}
+@mixin bgHoverColorSet($colorName) {
+  &:hover {
+    background-color: map.get($colors, $colorName);
+  }
+}
+
+@mixin colorSet($colorName) {
+  color: map.get($colors, $colorName);
+}
+@mixin colorHoverSet($colorName) {
+  &:hover {
+    color: map.get($colors, $colorName);
+  }
+}
+
+@mixin setStrictSize($width, $height) {
+  width: #{$width};
+  min-width: #{$width};
+  max-width: #{$width};
+  height: #{$height};
+  min-height: #{$height};
+  max-height: #{$height};
+}
+@mixin setStrictWidth($width) {
+  width: #{$width};
+  min-width: #{$width};
+  max-width: #{$width};
+}
+@mixin setStrictHeight($height) {
+  height: #{$height};
+  min-height: #{$height};
+  max-height: #{$height};
+}

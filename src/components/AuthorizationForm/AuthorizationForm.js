@@ -29,10 +29,12 @@ export function AuthorizationForm() {
   return (
     <div className="auth-form-wrapper flex flex-a-center flex-j-center">
       <form
-        className="auth-form flex flex-o-vertical p-40 border-round-tiny bg-prm flex-j-space-evenly"
+        className="auth-form flex flex-o-vertical p-40 
+        border-round-tiny bg-prm flex-j-space-evenly"
         onSubmit={postHandler}
       >
         <input
+          className="flex-item"
           type="text"
           placeholder="Login"
           required
@@ -40,7 +42,7 @@ export function AuthorizationForm() {
           onChange={(e) => setLogin(e.target.value)}
         />
         <input
-          className="m-v-20"
+          className="flex-item m-v-20"
           type="password"
           placeholder="Password"
           required
@@ -50,7 +52,8 @@ export function AuthorizationForm() {
         <div className="flex flex-o-vertical">
           <button
             type="submit"
-            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+            className=" flex-item bg-prm-d bg-prm-b-hover 
+            text-color-main-b text-color-main-d-hover"
           >
             Login
           </button>

@@ -1,0 +1,9 @@
+@use "src/css/imports.scss" as *;
+$component: "choose-definition";
+
+.#{$component}-container {
+  .#{$component} {
+    @include setStrictSize($base-card-width, $base-card-height);
+    @include bgColorSet("prm");
+  }
+}

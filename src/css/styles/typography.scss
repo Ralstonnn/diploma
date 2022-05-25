@@ -1,7 +1,8 @@
-@use "variables" as var;
+@use "variables" as *;
 @use "sass:map";
 
-@each $name, $ind in var.$indents {
+// INDENTS
+@each $name, $ind in $indents {
   .p-#{$name} {
     padding: $ind;
   }
@@ -80,10 +81,23 @@
   margin: 0;
 }
 
+// POSITIONING
+.p-absolute {
+  position: absolute;
+}
+.p-relative {
+  position: relative;
+}
+
 // INPUTS
 input {
   padding: 10px;
   border-width: 1px;
+  border: none;
+}
+textarea {
+  resize: none;
+  padding: 10px;
   border: none;
 }
 
@@ -92,16 +106,19 @@ button,
   display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  height: fit-content;
   padding: 20px 40px;
+  background-color: map.get($colors, "prm-d");
+  color: map.get($colors, "main-b");
   border: none;
   border-radius: 2px;
-  border-color: map.get(var.$colors, "main-sd");
   text-decoration: none;
-  color: black;
   font-size: 1.2rem;
 
   &:hover {
-    background-color: rgba(90, 90, 90, 0.164);
+    background-color: map.get($colors, "prm-b");
+    color: map.get($colors, "main-d");
   }
 }
 
@@ -124,13 +141,46 @@ button,
 }
 
 h1,
-.h1 {
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
   font-weight: bolder;
+}
+
+h1,
+.h1,
+.text-s1 {
+  font-size: 3rem;
+}
+h2,
+.h2,
+.text-s2 {
+  font-size: 2.5rem;
+}
+h3,
+.h3,
+.text-s3 {
   font-size: 2rem;
+}
+h4,
+.h4,
+.text-s4 {
+  font-size: 1.75rem;
+}
+h5,
+.h5,
+.text-s5 {
+  font-size: 1.5rem;
 }
 
 // COLORS
-@each $name, $value in var.$colors {
+@each $name, $value in $colors {
   .bg-#{$name} {
     background-color: $value;
 

@@ -1,0 +1,10 @@
+@use "/src/css/imports.scss" as *;
+
+$component: "spell-check";
+$item: #{$component}-card;
+
+.#{$component}-container {
+  .#{$item} {
+    @include setStrictSize($base-card-width, $base-card-height);
+  }
+}

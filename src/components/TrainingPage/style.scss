@@ -1,5 +1,6 @@
+@use "/src/css/imports.scss" as *;
+
 .training-btn {
-  width: 170px;
-  height: 110px;
+  @include setStrictSize(170px, 110px);
   border: none;
 }

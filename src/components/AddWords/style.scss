@@ -6,6 +6,7 @@ $component: "addWords";
   position: absolute;
   width: 100vw !important;
   height: 100vh !important;
+  z-index: $overlay-z-index;
 
   * {
     font-size: 1.2rem;
@@ -16,8 +17,7 @@ $component: "addWords";
     width: 100vw;
     height: 100vh;
     background-color: map.get($colors, "main-sd");
-    opacity: 0.8;
-    z-index: 2;
+    opacity: $base-overlay-bg-opacity;
   }
 
   form {
@@ -25,7 +25,7 @@ $component: "addWords";
     width: 385px;
     height: 400px;
     opacity: 1;
-    z-index: 500;
+    z-index: 2;
   }
 
   .add-word-definition-input {
@@ -33,36 +33,5 @@ $component: "addWords";
     height: 100%;
     padding: 10px;
     border: none;
-  }
-
-  .#{$component}-close-btn {
-    position: absolute;
-    left: calc(100% - 26px);
-    top: 4px;
-    width: 22px;
-    height: 22px;
-    opacity: 0.3;
-
-    &:hover {
-      opacity: 1;
-    }
-
-    &::before,
-    &::after {
-      position: absolute;
-      left: 10px;
-      content: " ";
-      height: 23px;
-      width: 2px;
-      background-color: #333;
-    }
-
-    &::before {
-      transform: rotate(45deg);
-    }
-
-    &::after {
-      transform: rotate(-45deg);
-    }
   }
 }

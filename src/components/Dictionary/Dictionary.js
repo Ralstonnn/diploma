@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { CloseButton } from "../CloseBtn/CloseBtn";
 import { LoadingAnimation } from "../LoadingAnimation/LoadingAnimation";
 import "./style.scss";
 
@@ -6,6 +7,7 @@ import "./style.scss";
 
 export function Dictionary() {
   const [items, setItems] = useState(<LoadingAnimation />);
+  const [showWordCard, setShowWordCard] = useState(false);
 
   const fetchWords = () => {
     fetch("/api/get-words")
@@ -15,7 +17,12 @@ export function Dictionary() {
 
         data.forEach((item, i) => {
           tempArr.push(
-            <Item word={item.word} definition={item.definition} key={i} />
+            <Item
+              word={item.word}
+              definition={item.definition}
+              showWordCard={() => setShowWordCard(true)}
+              key={i}
+            />
           );
         });
 
@@ -28,13 +35,18 @@ export function Dictionary() {
   }, []);
 
   return (
-    <div className="component-dictionary flex-item flex flex-o-vertical flex-a-center">
+    <div
+      className="component-dictionary flex-item flex 
+    flex-o-vertical flex-a-center"
+    >
       {items}
+
+      {showWordCard && <WordCard hideWordCard={() => setShowWordCard(false)} />}
     </div>
   );
 }
 
-function Item({ word, definition }) {
+function Item({ word, definition, showWordCard }) {
   const postHandler = () => {
     const formData = {
       method: "POST",
@@ -51,10 +63,11 @@ function Item({ word, definition }) {
   return (
     <div
       className="dictionary-item flex flex-j-space-between flex-a-center 
-      border-round-tiny bg-prm text-color-main-d p-20"
+      border-round-tiny bg-prm bg-prm-b-hover text-color-main-d p-20"
+      onClick={showWordCard}
     >
       <div className="m-r-20">
-        <h2>Word: {word}</h2>
+        <h4>Word: {word}</h4>
         <div className="m-t-10">Definition: {definition}</div>
       </div>
       <form onSubmit={postHandler}>
@@ -65,6 +78,29 @@ function Item({ word, definition }) {
         >
           Delete
         </button>
+      </form>
+    </div>
+  );
+}
+
+function WordCard({ word, definition, hideWordCard }) {
+  const postHandler = (e) => {
+    hideWordCard();
+  };
+
+  return (
+    <div className="word-card-container flex flex-a-center flex-j-center">
+      <div className="word-card-background"></div>
+
+      <form
+        onSubmit={postHandler}
+        className="word-card bg-prm flex flex-o-vertical flex-a-center 
+        flex-j-space-evenly p-relative p-50 "
+      >
+        <CloseButton callback={hideWordCard} />
+        <input type="text" value={"asdfasdf"} />
+        <textarea>asdf</textarea>
+        <button type="submit">Save</button>
       </form>
     </div>
   );

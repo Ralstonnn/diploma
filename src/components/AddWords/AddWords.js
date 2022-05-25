@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CloseButton } from "../CloseBtn/CloseBtn";
 import "./style.scss";
 
 export function AddWords({ closeBtnClick }) {
@@ -37,12 +38,12 @@ export function AddWords({ closeBtnClick }) {
       <div className="add-word-bg"></div>
       <form
         onSubmit={postHandler}
-        className="flex flex-o-vertical p-40 border-round-tiny 
+        className="flex flex-o-vertical flex-a-center p-40 border-round-tiny 
                   border-color-main-sd m-b-100 bg-prm"
       >
-        <div className="addWords-close-btn" onClick={closeBtnClick}></div>
+        <CloseButton callback={closeBtnClick} />
         <input
-          className="add-word-word-input border-round-tiny"
+          className="add-word-word-input flex-item border-round-tiny"
           type="text"
           placeholder="Enter word"
           required
@@ -50,14 +51,15 @@ export function AddWords({ closeBtnClick }) {
           onChange={(e) => setWord(e.target.value)}
         />
         <textarea
-          className="add-word-definition-input m-t-20 border-round-tiny"
+          className="add-word-definition-input flex-item 
+          m-t-20 border-round-tiny"
           placeholder="Enter definition"
           required
           value={definition}
           onChange={(e) => setDefinition(e.target.value)}
         />
         <button
-          className="m-t-20 bg-prm-d bg-prm-b-hover text-color-main-b 
+          className="flex-item m-t-20 bg-prm-d bg-prm-b-hover text-color-main-b 
                     text-color-main-d-hover"
           type="submit"
         >

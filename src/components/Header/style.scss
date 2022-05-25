@@ -7,7 +7,7 @@ header {
   align-items: center;
   width: 100vw;
   height: 100px;
-  z-index: 10;
+  z-index: $header-z-index;
 
   * {
     color: white !important;

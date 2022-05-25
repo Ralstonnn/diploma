@@ -36,5 +36,11 @@ $colors: (
   "main-sd": #333,
   "main-b": #fff,
   "main-d": #000,
-  "ntr-sd": rgba(73, 72, 72, 0.356),
+  "ntr-dt": rgba(73, 72, 72, 0.356),
 );
+
+$base-overlay-bg-opacity: 0.8;
+$base-card-width: 700px;
+$base-card-height: 600px;
+$header-z-index: 10;
+$overlay-z-index: 11;

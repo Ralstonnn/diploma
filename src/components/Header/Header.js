@@ -4,7 +4,7 @@ import "./style.scss";
 export function Header({ setShowAddWords }) {
   return (
     <header className="flex bg-prm-d">
-      <h1 className="p-h-40">EngSite</h1>
+      <h3 className="p-h-40">EngSite</h3>
       <HeaderButton to="/" text="Home" onClick={() => setShowAddWords(false)} />
       <HeaderButton
         to="/training"
@@ -28,7 +28,7 @@ export function Header({ setShowAddWords }) {
         </div>
       </div>
 
-      <h1 className="p-h-20">{sessionStorage.getItem("login")}</h1>
+      <h3 className="p-h-20">{sessionStorage.getItem("login")}</h3>
       <LogoutButton />
     </header>
   );

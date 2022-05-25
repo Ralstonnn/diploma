@@ -59,6 +59,30 @@ app.get("/api/repeat-words", (req, resp) => {
   );
 });
 
+app.get("/api/spell-check", (req, resp) => {
+  con.query(
+    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    dictionary d inner join users u on d.user_id = u.id 
+    where u.login = '${req.session.login}' and to_spellcheck = 1`,
+    (err, res) => {
+      if (err) throw err;
+      resp.json(res);
+    }
+  );
+});
+
+app.get("/api/choose-word-by-definition", (req, resp) => {
+  con.query(
+    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    dictionary d inner join users u on d.user_id = u.id 
+    where u.login = '${req.session.login}' and to_choose_definition = 1`,
+    (err, res) => {
+      if (err) throw err;
+      resp.json(res);
+    }
+  );
+});
+
 app.post("/api/set-to-learn", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,

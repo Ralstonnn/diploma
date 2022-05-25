@@ -8,6 +8,8 @@ import { AuthorizationForm } from "./components/AuthorizationForm/AuthorizationF
 import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm";
 import { Dictionary } from "./components/Dictionary/Dictionary";
 import { RepeatWords } from "./components/Trainings/RepeatWords/RepeatWords";
+import { SpellCheck } from "./components/Trainings/SpellCheck/SpellCheck";
+import { ChooseWordByDef } from "./components/Trainings/ChooseDefinition/ChooseWordByDef";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -20,6 +22,11 @@ root.render(
           <Route path="/training/learn-words" element={<LearnWords />} />
           <Route path="/training/repeat-words" element={<RepeatWords />} />
           <Route path="/dictionary" element={<Dictionary />} />
+          <Route path="/training/spell-check" element={<SpellCheck />} />
+          <Route
+            path="/training/choose-word-by-definition"
+            element={<ChooseWordByDef />}
+          />
         </Route>
       </Routes>
       <LoginRoutes />
