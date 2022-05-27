@@ -198,6 +198,38 @@ app.post("/api/finish-learn-training", (req, resp) => {
   resp.json({ response: "y" });
 });
 
+app.post("/api/choose-word-by-definition-training", (req, resp) => {
+  let queryStr = ``;
+  let user_id = "";
+
+  con.query(
+    `select id from users where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      user_id = res[0].id;
+
+      req.body.data.forEach((item) => {
+        if (item.isAnsweredRight) {
+          queryStr += `update dictionary set 
+            to_choose_word=0
+            where word='${item.word}' and definition='${item.definition}' 
+            and user_id = ${user_id};`;
+        } else {
+          queryStr += `update dictionary set 
+            to_choose_word=1, to_learn=1, repeat_counter=1, to_spellcheck=1 
+            where word='${item.word}' and definition='${item.definition}' 
+            and user_id = ${user_id};`;
+        }
+      });
+
+      con.query(queryStr, (err) => {
+        if (err) throw err;
+        resp.json({ response: "y" });
+      });
+    }
+  );
+});
+
 /**
  * LOGIN SYSTEM
  */

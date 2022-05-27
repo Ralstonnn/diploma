@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 import "./style.scss";
 
@@ -6,7 +7,7 @@ export function ChooseWordByDef() {
   const [isLoading, setIsLoading] = useState(true);
   const [index, setIndex] = useState(0);
   const [data, setData] = useState([]);
-  const [trainingCards, setTrainingCards] = useState([]);
+  const navigate = useNavigate();
 
   // TODO: Make definitions not to repeat
   const getRandomWords = () => {
@@ -39,17 +40,41 @@ export function ChooseWordByDef() {
     return result;
   };
 
+  const finishTraining = useCallback(() => {
+    setIsLoading(true);
+
+    const formData = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        data,
+      }),
+    };
+
+    navigate("/training");
+    fetch("/api/choose-word-by-definition-training", formData)
+      .then((resp) => resp.json())
+      .then((res) => {
+        if (res.response === "y") {
+          setIsLoading(false);
+          navigate("/training");
+        }
+      });
+  }, [data, navigate]);
+
   const rightCallback = useCallback(() => {
     let tempArr = data;
-    console.log({ ...tempArr[index] });
     tempArr[index] = { ...tempArr[index], isAnsweredRight: true };
     setData(tempArr);
+
+    if (index === data.length - 1) finishTraining();
     setIndex(index + 1);
-  }, [index, data]);
+  }, [index, data, finishTraining]);
 
   const wrongCallback = useCallback(() => {
+    if (index === data.length - 1) finishTraining();
     setIndex(index + 1);
-  }, [index]);
+  }, [index, finishTraining, data]);
 
   useEffect(() => {
     fetch("/api/choose-word-by-definition")
@@ -85,6 +110,7 @@ export function ChooseWordByDef() {
   );
 }
 
+// TODO: Fix frontend
 function ChooseDefinitionCard({
   word,
   definition,
@@ -95,12 +121,12 @@ function ChooseDefinitionCard({
   return (
     <div
       className="choose-definition flex flex-a-center 
-        flex-j-space-evenly p-50"
+        flex-j-space-between p-50"
     >
-      <div>
+      <div className="flex-item text-align-center">
         <div className="text-s3">{definition}</div>
       </div>
-      <div className="flex flex-o-vertical m-l-20">
+      <div className="flex flex-o-vertical m-l-20 flex-item-3">
         {getRandomWords.map((def, i) => (
           <button
             className="flex-item m-t-10"
