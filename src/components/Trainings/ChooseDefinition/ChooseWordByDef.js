@@ -4,38 +4,68 @@ import "./style.scss";
 
 export function ChooseWordByDef() {
   const [isLoading, setIsLoading] = useState(true);
-  const [wordsDefs, setWordsDefs] = useState([]);
   const [index, setIndex] = useState(0);
+  const [data, setData] = useState([]);
+  const [trainingCards, setTrainingCards] = useState([]);
+
+  // TODO: Make definitions not to repeat
+  const getRandomWords = () => {
+    let result = [];
+    let randomWords = [];
+    let randNum = null;
+    let isRightDefIn = false;
+
+    for (let i = 0; i < 3; ) {
+      randNum = Math.floor(Math.random() * data.length);
+
+      if (randNum === index || randomWords.includes(data[randNum].word))
+        continue;
+
+      randomWords.push(data[randNum].word);
+      i++;
+    }
+
+    randNum = Math.floor(Math.random() * 4);
+
+    randomWords.forEach((item, i) => {
+      if (randNum === i) {
+        result.push(data[index].word);
+        isRightDefIn = true;
+      }
+      result.push(item);
+    });
+
+    if (!isRightDefIn) result.push(data[index].word);
+    return result;
+  };
+
+  const rightCallback = useCallback(() => {
+    let tempArr = data;
+    console.log({ ...tempArr[index] });
+    tempArr[index] = { ...tempArr[index], isAnsweredRight: true };
+    setData(tempArr);
+    setIndex(index + 1);
+  }, [index, data]);
+
+  const wrongCallback = useCallback(() => {
+    setIndex(index + 1);
+  }, [index]);
 
   useEffect(() => {
     fetch("/api/choose-word-by-definition")
       .then((resp) => resp.json())
-      .then((data) => {
-        setWordsDefs(data);
+      .then((res) => {
+        setData(
+          res.map((item, i) => {
+            return {
+              ...item,
+              isAnsweredRight: false,
+            };
+          })
+        );
         setIsLoading(false);
       });
   }, []);
-
-  // TODO: Make definitions not to repeat
-  const randomDefs = useCallback(() => {
-    let result = [];
-    let rightDefSet = false;
-
-    for (let i = 0; i < 3; ) {
-      let randNum = Math.floor(Math.random() * wordsDefs.length);
-      if (randNum === index && !rightDefSet) {
-        result.push(wordsDefs[randNum].definition);
-        rightDefSet = true;
-        console.log("added");
-      } else if (randNum === index && rightDefSet) {
-        continue;
-      }
-      result.push(wordsDefs[randNum].definition);
-      i++;
-    }
-
-    return result;
-  }, [wordsDefs, index]);
 
   if (isLoading) return <LoadingAnimation />;
 
@@ -45,33 +75,38 @@ export function ChooseWordByDef() {
         flex-j-center"
     >
       <ChooseDefinitionCard
-        word={wordsDefs[index].word}
-        definition={wordsDefs[index].definition}
-        randomDefs={randomDefs(index)}
+        word={data[index].word}
+        definition={data[index].definition}
+        getRandomWords={getRandomWords()}
+        rightCallback={rightCallback}
+        wrongCallback={wrongCallback}
       />
     </div>
   );
 }
 
-function ChooseDefinitionCard({ word, definition, randomDefs }) {
-  useEffect(() => {
-    console.log(randomDefs);
-  }, []);
-
+function ChooseDefinitionCard({
+  word,
+  definition,
+  getRandomWords,
+  rightCallback,
+  wrongCallback,
+}) {
   return (
     <div
       className="choose-definition flex flex-a-center 
         flex-j-space-evenly p-50"
     >
       <div>
-        <div className="text-s3">{word}</div>
+        <div className="text-s3">{definition}</div>
       </div>
-      <div className="flex flex-o-vertical">
-        {randomDefs.map((def, i) => (
+      <div className="flex flex-o-vertical m-l-20">
+        {getRandomWords.map((def, i) => (
           <button
-            className="m-t-10"
+            className="flex-item m-t-10"
             onClick={(e) => {
-              if (e.target.innerHTML === definition) console.log("true");
+              if (e.target.innerHTML === word) rightCallback();
+              else wrongCallback();
             }}
             key={i}
           >

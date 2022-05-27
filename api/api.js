@@ -75,7 +75,7 @@ app.get("/api/choose-word-by-definition", (req, resp) => {
   con.query(
     `select d.word, d.definition, time_before_repeat, repeat_counter from 
     dictionary d inner join users u on d.user_id = u.id 
-    where u.login = '${req.session.login}' and to_choose_definition = 1`,
+    where u.login = '${req.session.login}' and to_choose_word = 1`,
     (err, res) => {
       if (err) throw err;
       resp.json(res);
