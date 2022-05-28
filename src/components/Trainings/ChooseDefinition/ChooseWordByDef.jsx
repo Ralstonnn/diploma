@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
+import { ChooseDefinitionCard } from "./parts/TrainingCard";
 import "./style.scss";
 
 export function ChooseWordByDef() {
@@ -9,7 +10,6 @@ export function ChooseWordByDef() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  // TODO: Make definitions not to repeat
   const getRandomWords = () => {
     let result = [];
     let randomWords = [];
@@ -80,8 +80,13 @@ export function ChooseWordByDef() {
     fetch("/api/choose-word-by-definition")
       .then((resp) => resp.json())
       .then((res) => {
+        if (res.length === 0) {
+          alert("There is no words to learn");
+          return navigate("/training");
+        }
+
         setData(
-          res.map((item, i) => {
+          res.map((item) => {
             return {
               ...item,
               isAnsweredRight: false,
@@ -106,40 +111,6 @@ export function ChooseWordByDef() {
         rightCallback={rightCallback}
         wrongCallback={wrongCallback}
       />
-    </div>
-  );
-}
-
-// TODO: Fix frontend
-function ChooseDefinitionCard({
-  word,
-  definition,
-  getRandomWords,
-  rightCallback,
-  wrongCallback,
-}) {
-  return (
-    <div
-      className="choose-definition flex flex-a-center 
-        flex-j-space-between p-50"
-    >
-      <div className="flex-item text-align-center">
-        <div className="text-s3">{definition}</div>
-      </div>
-      <div className="flex flex-o-vertical m-l-20 flex-item-3">
-        {getRandomWords.map((def, i) => (
-          <button
-            className="flex-item m-t-10"
-            onClick={(e) => {
-              if (e.target.innerHTML === word) rightCallback();
-              else wrongCallback();
-            }}
-            key={i}
-          >
-            {def}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
