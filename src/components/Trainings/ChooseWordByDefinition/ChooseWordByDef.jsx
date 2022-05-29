@@ -105,7 +105,7 @@ export function ChooseWordByDef() {
     fetch("/api/choose-word-by-definition")
       .then((resp) => resp.json())
       .then((res) => {
-        if (res.length === 0) {
+        if (res.dictionary.length === 0) {
           alert("There is no words to learn");
           return navigate("/training");
         }
