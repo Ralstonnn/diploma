@@ -36,7 +36,7 @@ app.get("/api/get-words", (req, resp) => {
 
 app.get("/api/learn-words", (req, resp) => {
   con.query(
-    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    `select d.word, d.definition, repeat_date, repeat_counter from 
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and d.to_learn = 1`,
     (err, res) => {
@@ -48,10 +48,10 @@ app.get("/api/learn-words", (req, resp) => {
 
 app.get("/api/repeat-words", (req, resp) => {
   con.query(
-    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    `select d.word, d.definition, repeat_date, repeat_counter from 
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and d.to_learn = 0 and 
-    d.time_before_repeat <= curdate()`,
+    d.repeat_date <= curdate()`,
     (err, res) => {
       if (err) throw err;
       resp.json(res);
@@ -61,7 +61,7 @@ app.get("/api/repeat-words", (req, resp) => {
 
 app.get("/api/spell-check", (req, resp) => {
   con.query(
-    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    `select d.word, d.definition, repeat_date, repeat_counter from 
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and to_spellcheck = 1`,
     (err, res) => {
@@ -73,12 +73,26 @@ app.get("/api/spell-check", (req, resp) => {
 
 app.get("/api/choose-word-by-definition", (req, resp) => {
   con.query(
-    `select d.word, d.definition, time_before_repeat, repeat_counter from 
+    `select d.word, d.definition, repeat_date, repeat_counter from 
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and to_choose_word = 1`,
     (err, res) => {
       if (err) throw err;
-      resp.json(res);
+      let wordsFromDictionary = res;
+
+      if (wordsFromDictionary.length > 0 && wordsFromDictionary.length < 10) {
+        con.query(`select word from placeholder_dictionary`, (err, res) => {
+          if (err) throw err;
+          resp.json({
+            dictionary: wordsFromDictionary,
+            placeholderDictionary: res,
+          });
+        });
+
+        return;
+      }
+
+      resp.json({ dictionary: wordsFromDictionary });
     }
   );
 });
@@ -112,7 +126,7 @@ app.post("/api/set-reprat-date", (req, resp) => {
 
       if (req.body.increaseRepeatCounter) {
         con.query(
-          `update dictionary set time_before_repeat = '${req.body.date}', 
+          `update dictionary set repeat_date = '${req.body.date}', 
           repeat_counter = repeat_counter+1 where word='${req.body.word}' 
           and definition='${req.body.definition}' and user_id=${user_id} `,
           (err) => {
@@ -125,7 +139,7 @@ app.post("/api/set-reprat-date", (req, resp) => {
       }
 
       con.query(
-        `update dictionary set time_before_repeat = '${req.body.date}', 
+        `update dictionary set repeat_date = '${req.body.date}', 
         repeat_counter = 1 where word='${req.body.word}' 
         and definition='${req.body.definition}' and user_id=${user_id} `,
         (err) => {
@@ -185,7 +199,7 @@ app.post("/api/finish-learn-training", (req, resp) => {
       req.body.result.forEach((item) => {
         con.query(
           `update dictionary set 
-          time_before_repeat='${item.time_before_repeat}', to_learn=0 
+          repeat_date='${item.repeat_date}', to_learn=0 
           where word='${item.word}' and user_id = ${user_id}`,
           (err) => {
             if (err) throw err;
@@ -198,7 +212,7 @@ app.post("/api/finish-learn-training", (req, resp) => {
   resp.json({ response: "y" });
 });
 
-app.post("/api/choose-word-by-definition-training", (req, resp) => {
+app.post("/api/choose-word-by-definition-finish-training", (req, resp) => {
   let queryStr = ``;
   let user_id = "";
 

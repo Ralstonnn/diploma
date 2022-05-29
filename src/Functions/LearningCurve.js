@@ -5,7 +5,7 @@ export function SetDateToRepeat(wordsDefs) {
     let calcDate = item.repeat_counter * repeatCoefficient;
     let dateParsed = new Date();
 
-    item.time_before_repeat = `${dateParsed.getFullYear()}-${
+    item.repeat_date = `${dateParsed.getFullYear()}-${
       dateParsed.getMonth() + 1
     }-${dateParsed.getDate() + calcDate}`;
   });

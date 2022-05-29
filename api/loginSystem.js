@@ -23,8 +23,8 @@ module.exports = {
   },
   register: function (req, resp) {
     con.query(
-      `insert into users (login, password) value 
-      ('${req.body.login}', '${req.body.password}')`,
+      `insert into users (email, login, password) value 
+      ('${req.body.email}', '${req.body.login}', '${req.body.password}')`,
       (err) => {
         if (err) {
           resp.json({ response: "n" });

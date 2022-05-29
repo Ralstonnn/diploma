@@ -9,7 +9,7 @@ import { RegistrationForm } from "./components/RegistrationForm/RegistrationForm
 import { Dictionary } from "./components/Dictionary/Dictionary";
 import { RepeatWords } from "./components/Trainings/RepeatWords/RepeatWords";
 import { SpellCheck } from "./components/Trainings/SpellCheck/SpellCheck";
-import { ChooseWordByDef } from "./components/Trainings/ChooseDefinition/ChooseWordByDef";
+import { ChooseWordByDef } from "./components/Trainings/ChooseWordByDefinition/ChooseWordByDef";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

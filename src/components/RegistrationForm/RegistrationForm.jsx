@@ -5,6 +5,7 @@ export function RegistrationForm() {
   const navigate = useNavigate();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const postHandler = (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ export function RegistrationForm() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        email,
         login,
         password,
       }),
@@ -39,7 +41,15 @@ export function RegistrationForm() {
         onSubmit={postHandler}
       >
         <input
-          className="flex-item"
+          className="flex-item m-b-10"
+          type="text"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          className="flex-item m-v-10"
           type="text"
           placeholder="Login"
           required
@@ -47,14 +57,14 @@ export function RegistrationForm() {
           onChange={(e) => setLogin(e.target.value)}
         />
         <input
-          className="flex-item m-v-20"
+          className="flex-item m-v-10"
           type="password"
           placeholder="Password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="flex flex-o-vertical">
+        <div className="flex flex-o-vertical m-t-10">
           <button
             type="submit"
             className="flex-item bg-prm-d bg-prm-b-hover text-color-main-b 
