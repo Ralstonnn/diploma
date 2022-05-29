@@ -6,47 +6,73 @@ import "./style.scss";
 // TODO: Make cards clickable
 
 export function Dictionary() {
-  const [items, setItems] = useState(<LoadingAnimation />);
+  const [data, setData] = useState([]);
   const [showWordCard, setShowWordCard] = useState(false);
+  const [cardConfig, setCardConfig] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchWords = () => {
-    fetch("/api/get-words")
-      .then((resp) => resp.json())
-      .then((data) => {
-        let tempArr = [];
+  const onWordCardSubmit = (e) => {
+    const formData = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...cardConfig }),
+    };
 
-        data.forEach((item, i) => {
-          tempArr.push(
-            <Item
-              word={item.word}
-              definition={item.definition}
-              showWordCard={() => setShowWordCard(true)}
-              key={i}
-            />
-          );
-        });
-
-        setItems(tempArr);
-      });
+    fetch("/api/update-word", formData);
   };
 
   useEffect(() => {
-    fetchWords();
+    fetch("/api/get-words")
+      .then((resp) => resp.json())
+      .then((res) => {
+        setData(res);
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) return <LoadingAnimation />;
 
   return (
     <div
       className="component-dictionary flex-item flex 
     flex-o-vertical flex-a-center"
     >
-      {items}
+      {data.map((item, i) => {
+        return (
+          <Item
+            word={item.word}
+            definition={item.definition}
+            showWordCard={() => setShowWordCard(true)}
+            setCardConfig={(word, definition) => {
+              setCardConfig({
+                word,
+                definition,
+                wordToChange: word,
+                definitionToChange: definition,
+              });
+            }}
+            key={i}
+          />
+        );
+      })}
 
-      {showWordCard && <WordCard hideWordCard={() => setShowWordCard(false)} />}
+      {showWordCard && (
+        <WordCard
+          word={cardConfig.word}
+          definition={cardConfig.definition}
+          hideWordCard={() => setShowWordCard(false)}
+          wordOnChange={(word) => setCardConfig({ ...cardConfig, word: word })}
+          definitionOnChange={(definition) =>
+            setCardConfig({ ...cardConfig, definition: definition })
+          }
+          onWordCardSubmit={onWordCardSubmit}
+        />
+      )}
     </div>
   );
 }
 
-function Item({ word, definition, showWordCard }) {
+function Item({ word, definition, showWordCard, setCardConfig }) {
   const postHandler = () => {
     const formData = {
       method: "POST",
@@ -64,7 +90,10 @@ function Item({ word, definition, showWordCard }) {
     <div
       className="dictionary-item flex flex-j-space-between flex-a-center 
       border-round-tiny bg-prm bg-prm-b-hover text-color-main-d p-20"
-      onClick={showWordCard}
+      onClick={() => {
+        showWordCard();
+        setCardConfig(word, definition);
+      }}
     >
       <div className="m-r-20">
         <h4>Word: {word}</h4>
@@ -83,23 +112,37 @@ function Item({ word, definition, showWordCard }) {
   );
 }
 
-function WordCard({ word, definition, hideWordCard }) {
-  const postHandler = (e) => {
-    hideWordCard();
-  };
-
+// TODO: Find out how to change card config!!!
+function WordCard({
+  word,
+  definition,
+  hideWordCard,
+  wordOnChange,
+  definitionOnChange,
+  onWordCardSubmit,
+}) {
   return (
     <div className="word-card-container flex flex-a-center flex-j-center">
       <div className="word-card-background"></div>
 
       <form
-        onSubmit={postHandler}
+        onSubmit={(e) => {
+          onWordCardSubmit(e);
+          hideWordCard();
+        }}
         className="word-card bg-prm flex flex-o-vertical flex-a-center 
         flex-j-space-evenly p-relative p-50 "
       >
         <CloseButton callback={hideWordCard} />
-        <input type="text" value={"asdfasdf"} />
-        <textarea>asdf</textarea>
+        <input
+          type="text"
+          value={word}
+          onChange={(e) => wordOnChange(e.target.value)}
+        />
+        <textarea
+          value={definition}
+          onChange={(e) => definitionOnChange(e.target.value)}
+        />
         <button type="submit">Save</button>
       </form>
     </div>

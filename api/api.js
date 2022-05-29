@@ -169,6 +169,28 @@ app.post("/api/add-words", (req, resp) => {
   );
 });
 
+app.post("/api/update-word", (req, resp) => {
+  con.query(
+    `select id from users where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      let user_id = res[0].id;
+
+      con.query(
+        `update dictionary set word='${req.body.word}', 
+        definition='${req.body.definition}' 
+        where word='${req.body.wordToChange}' 
+        and definition='${req.body.definitionToChange}'
+        and user_id=${user_id}`,
+        (err) => {
+          if (err) throw err;
+          resp.json({ response: "y" });
+        }
+      );
+    }
+  );
+});
+
 app.post("/api/delete-word", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
