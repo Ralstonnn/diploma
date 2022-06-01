@@ -13,3 +13,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+#root {
+  overflow-x: hidden;
+}

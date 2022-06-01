@@ -4,7 +4,6 @@ import { Header } from "./components/Header/Header";
 import { LoadingPage } from "./components/LoadingPage/LoadingPage";
 import { AddWords } from "./components/AddWords/AddWords";
 import "./css/App.css";
-import "./css/CommonClasses.css";
 import "./css/styles/flex.scss";
 import "./css/styles/typography.scss";
 import "./css/styles/template.scss";

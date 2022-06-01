@@ -3,8 +3,6 @@ import { CloseButton } from "../CloseBtn/CloseBtn";
 import { LoadingAnimation } from "../LoadingAnimation/LoadingAnimation";
 import "./style.scss";
 
-// TODO: Make cards clickable
-
 export function Dictionary() {
   const [data, setData] = useState([]);
   const [showWordCard, setShowWordCard] = useState(false);
@@ -112,7 +110,6 @@ function Item({ word, definition, showWordCard, setCardConfig }) {
   );
 }
 
-// TODO: Find out how to change card config!!!
 function WordCard({
   word,
   definition,

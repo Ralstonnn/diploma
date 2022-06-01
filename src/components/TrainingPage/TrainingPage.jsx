@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../../css/CommonClasses.css";
 import "../../css/styles/template.scss";
 import "./style.scss";
 

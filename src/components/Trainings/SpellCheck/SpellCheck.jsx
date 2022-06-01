@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
-import { SpellCheckCard } from "./parts/TrainingCard";
+import { TrainingCard } from "./parts/TrainingCard";
 import "./style.scss";
 
 export function SpellCheck() {
@@ -9,17 +9,7 @@ export function SpellCheck() {
   const [isLoading, setIsLoading] = useState(true);
   const [index, setIndex] = useState(0);
   const [data, setData] = useState([]);
-
-  const test = (i) => {
-    return data[index].lettest[i].value;
-  };
-
-  const inputOnChange = (inputIndex, value) => {
-    let tempArr = data;
-    tempArr[index].letters[inputIndex].value = value;
-    console.log(tempArr);
-    setData(tempArr);
-  };
+  const [inputData, setInputData] = useState({});
 
   useEffect(() => {
     fetch("/api/spell-check")
@@ -50,20 +40,16 @@ export function SpellCheck() {
 
   if (isLoading) return <LoadingAnimation />;
 
+  // TODO: Take inputs to different component and set it once a card changes.
+  // Make something like i made in dictionary
   return (
     <div className="spell-check-container flex-item flex flex-j-center">
-      {/* <SpellCheckCard /> */}
-      {/* <button onClick={test}> test</button> */}
-      {/* <br /> */}
-      {console.log("redrawn")}
-      {data[0].letters.map((letter, i) => (
-        <input
-          value={data[0].letters[i].value}
-          onChange={(e) => inputOnChange(i, e.target.value)}
-          key={i}
-          style={{ border: "1px solid black", marginLeft: "20px" }}
-        />
-      ))}
+      <TrainingCard
+        word={data[0].word}
+        definition={data[0].definition}
+        setInputData={setInputData}
+        inputData={inputData}
+      />
     </div>
   );
 }
