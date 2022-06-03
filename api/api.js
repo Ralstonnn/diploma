@@ -266,7 +266,6 @@ app.post("/api/choose-word-by-definition-finish-training", (req, resp) => {
   );
 });
 
-// TODO: Write function to finish SpellCheck
 app.post("/api/finish-spell-check-training", (req, resp) => {
   let queryStr = ``;
   let user_id = null;

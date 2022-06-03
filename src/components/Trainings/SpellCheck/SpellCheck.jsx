@@ -67,15 +67,12 @@ export function SpellCheck() {
       });
     });
 
-    // console.log(result);
-
     const formData = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ result }),
     };
 
-    // TODO: Write call to finish training
     fetch("/api/finish-spell-check-training", formData)
       .then((resp) => resp.json())
       .then((res) => {
