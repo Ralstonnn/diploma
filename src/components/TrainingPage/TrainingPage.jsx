@@ -9,12 +9,12 @@ function TrainingPage() {
   return (
     <div className="flex flex-wrap flex-item m-ng-h-15 m-ng-v-20">
       <TrainingButton text="Learn" href="/training/learn-words" />
-      <TrainingButton text="Repeat" href="/training/repeat-words" />
       <TrainingButton text="SpellCheck" href="/training/spell-check" />
       <TrainingButton
         text="ChooseDefinition"
         href="/training/choose-word-by-definition"
       />
+      <TrainingButton text="Repeat" href="/training/repeat-words" />
     </div>
   );
 }
