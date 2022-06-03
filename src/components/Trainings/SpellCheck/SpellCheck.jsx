@@ -67,7 +67,7 @@ export function SpellCheck() {
       });
     });
 
-    console.log(result);
+    // console.log(result);
 
     const formData = {
       method: "POST",
@@ -76,7 +76,11 @@ export function SpellCheck() {
     };
 
     // TODO: Write call to finish training
-    fetch("/api/finish-spell-check-training", formData);
+    fetch("/api/finish-spell-check-training", formData)
+      .then((resp) => resp.json())
+      .then((res) => {
+        if (res.response === "y") navigate("/training");
+      });
   };
 
   if (isLoading) return <LoadingAnimation />;

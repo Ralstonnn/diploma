@@ -269,13 +269,30 @@ app.post("/api/choose-word-by-definition-finish-training", (req, resp) => {
 // TODO: Write function to finish SpellCheck
 app.post("/api/finish-spell-check-training", (req, resp) => {
   let queryStr = ``;
-  let user_id = "";
+  let user_id = null;
 
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
       if (err) throw err;
       user_id = res[0].id;
+
+      req.body.result.forEach((item) => {
+        if (item.isAnsweredRight) {
+          queryStr += `update dictionary set to_spellcheck=0 
+            where user_id=${user_id} and word='${item.word}' 
+            and definition='${item.definition}';`;
+        } else {
+          queryStr += `update dictionary set to_learn=1, repeat_counter=1, 
+            to_choose_word=1, to_spellcheck=1 where user_id=${user_id} and 
+            word='${item.word}' and definition='${item.definition}';`;
+        }
+      });
+
+      con.query(queryStr, (err) => {
+        if (err) throw err;
+        resp.json({ response: "y" });
+      });
     }
   );
 });
