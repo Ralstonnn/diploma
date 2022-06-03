@@ -12,13 +12,19 @@ $item: #{$component}-card;
     border: 1px solid black;
     height: 40px;
     width: 30px;
+    pointer-events: initial;
+
+    &[data-is-right="false"],
+    &[data-is-right="true"] {
+      pointer-events: none;
+    }
 
     &[data-is-right="true"] {
-      color: green;
+      color: #43a047;
     }
 
     &[data-is-right="false"] {
-      color: red;
+      color: #f44336;
     }
 
     & + .#{$component}-input {

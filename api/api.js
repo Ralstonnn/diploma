@@ -266,6 +266,20 @@ app.post("/api/choose-word-by-definition-finish-training", (req, resp) => {
   );
 });
 
+// TODO: Write function to finish SpellCheck
+app.post("/api/finish-spell-check-training", (req, resp) => {
+  let queryStr = ``;
+  let user_id = "";
+
+  con.query(
+    `select id from users where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) throw err;
+      user_id = res[0].id;
+    }
+  );
+});
+
 /**
  * LOGIN SYSTEM
  */
