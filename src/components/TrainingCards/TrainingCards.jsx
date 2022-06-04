@@ -6,7 +6,6 @@ import "./style.scss";
 
 // TODO: Write click next and click previous inside the card
 // TODO: Pass all the words and definition it'll help to reduce loading time
-// TODO: Fix blinking on next and previous clicks
 
 function TrainingCardLearnWords({
   word,

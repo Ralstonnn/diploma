@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import "../../css/styles/template.scss";
 import "./style.scss";
 
-// TODO: Show definition and give couple words to choose
-// TODO: Show word and let the user to choose definition
-// TODO: Add training to check the word spelling
 function TrainingPage() {
   return (
     <div className="flex flex-wrap flex-item m-ng-h-15 m-ng-v-20">

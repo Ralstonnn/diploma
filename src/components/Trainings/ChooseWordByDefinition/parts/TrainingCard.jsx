@@ -1,5 +1,3 @@
-// TODO: Fix frontend
-
 export function ChooseDefinitionCard({
   word,
   definition,
