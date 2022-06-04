@@ -32,8 +32,8 @@ root.render(
             </Route>
           </Routes>
         </div>
+        <LoginRoutes />
       </BrowserRouter>
-      <LoginRoutes />
     </div>
   </React.StrictMode>
 );
@@ -47,12 +47,10 @@ function LoginRoutes() {
 
   if (!isLoggedIn) {
     return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<AuthorizationForm />} />
-          <Route path="/registration" element={<RegistrationForm />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<AuthorizationForm />} />
+        <Route path="/registration" element={<RegistrationForm />} />
+      </Routes>
     );
   }
 }
