@@ -14,28 +14,26 @@ import { ChooseWordByDef } from "./components/Trainings/ChooseWordByDefinition/C
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <div>
-      <BrowserRouter>
-        <div className="outer-container">
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route path="training/" element={<TrainingPage />} />
-              <Route path="training/learn-words" element={<LearnWords />} />
-              <Route path="training/repeat-words" element={<RepeatWords />} />
-              <Route path="dictionary" element={<Dictionary />} />
-              <Route path="training/spell-check" element={<SpellCheck />} />
-              <Route
-                path="/training/choose-word-by-definition"
-                element={<ChooseWordByDef />}
-              />
-            </Route>
-          </Routes>
-        </div>
-        <LoginRoutes />
-      </BrowserRouter>
-    </div>
-  </React.StrictMode>
+  <div>
+    <BrowserRouter>
+      <div className="outer-container">
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="training/" element={<TrainingPage />} />
+            <Route path="training/learn-words" element={<LearnWords />} />
+            <Route path="training/repeat-words" element={<RepeatWords />} />
+            <Route path="dictionary" element={<Dictionary />} />
+            <Route path="training/spell-check" element={<SpellCheck />} />
+            <Route
+              path="/training/choose-word-by-definition"
+              element={<ChooseWordByDef />}
+            />
+          </Route>
+        </Routes>
+      </div>
+      <LoginRoutes />
+    </BrowserRouter>
+  </div>
 );
 
 function LoginRoutes() {

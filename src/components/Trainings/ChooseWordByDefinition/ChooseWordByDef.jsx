@@ -10,40 +10,36 @@ export function ChooseWordByDef() {
   const [data, setData] = useState({});
   const navigate = useNavigate();
 
-  const getRandomWords = () => {
+  const getRandomWords = (dictionary, placeholderDictionary, rightWord) => {
     let result = [];
     let randomWords = [];
-    let placeholderDictionary = data.placeholderDictionary
-      ? data.placeholderDictionary
-      : null;
     let randNum = null;
     let isRightDefIn = false;
 
     if (!placeholderDictionary) {
       for (let i = 0; i < 3; ) {
-        randNum = Math.floor(Math.random() * data.dictionary.length);
+        randNum = Math.floor(Math.random() * dictionary.length);
 
         if (
-          randNum === index ||
-          randomWords.includes(data.dictionary[randNum].word)
+          dictionary[randNum].word === rightWord ||
+          randomWords.includes(dictionary[randNum].word)
         )
           continue;
 
-        randomWords.push(data.dictionary[randNum].word);
+        randomWords.push(dictionary[randNum].word);
         i++;
       }
     } else {
       for (let i = 0; i < 3; ) {
-        randNum = Math.floor(Math.random() * data.placeholderDictionary.length);
+        randNum = Math.floor(Math.random() * placeholderDictionary.length);
 
         if (
-          data.placeholderDictionary[randNum].word ===
-            data.dictionary[index].word ||
-          randomWords.includes(data.placeholderDictionary[randNum].word)
+          placeholderDictionary[randNum].word === rightWord ||
+          randomWords.includes(placeholderDictionary[randNum].word)
         )
           continue;
 
-        randomWords.push(data.placeholderDictionary[randNum].word);
+        randomWords.push(placeholderDictionary[randNum].word);
         i++;
       }
     }
@@ -52,13 +48,13 @@ export function ChooseWordByDef() {
 
     randomWords.forEach((item, i) => {
       if (randNum === i) {
-        result.push(data.dictionary[index].word);
+        result.push(rightWord);
         isRightDefIn = true;
       }
       result.push(item);
     });
 
-    if (!isRightDefIn) result.push(data.dictionary[index].word);
+    if (!isRightDefIn) result.push(rightWord);
     return result;
   };
 
@@ -110,26 +106,19 @@ export function ChooseWordByDef() {
           return navigate("/training");
         }
 
-        if (res.placeholderDictionary) {
-          setData({
-            dictionary: res.dictionary.map((item) => {
-              return {
-                ...item,
-                isAnsweredRight: false,
-              };
-            }),
-            placeholderDictionary: res.placeholderDictionary,
-          });
-        } else {
-          setData({
-            dictionary: res.dictionary.map((item) => {
-              return {
-                ...item,
-                isAnsweredRight: false,
-              };
-            }),
-          });
-        }
+        setData({
+          dictionary: res.dictionary.map((item) => {
+            return {
+              ...item,
+              isAnsweredRight: false,
+              randomWords: getRandomWords(
+                res.dictionary,
+                res.placeholderDictionary ? res.placeholderDictionary : null,
+                item.word
+              ),
+            };
+          }),
+        });
 
         setIsLoading(false);
       });
@@ -145,7 +134,7 @@ export function ChooseWordByDef() {
       <ChooseDefinitionCard
         word={data.dictionary[index].word}
         definition={data.dictionary[index].definition}
-        getRandomWords={getRandomWords()}
+        randomWords={data.dictionary[index].randomWords}
         rightCallback={rightCallback}
         wrongCallback={wrongCallback}
       />

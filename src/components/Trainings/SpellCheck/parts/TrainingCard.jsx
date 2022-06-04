@@ -49,7 +49,7 @@ export function TrainingCard({
                 data-is-right={setInputColor(i)}
                 value={data.letters[i].value}
                 onChange={(e) => {
-                  changeInputFocus(i);
+                  if (e.target.value !== "") changeInputFocus(i);
                   inputOnChange(e, i);
                 }}
                 key={i}

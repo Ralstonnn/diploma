@@ -1,7 +1,7 @@
 export function ChooseDefinitionCard({
   word,
   definition,
-  getRandomWords,
+  randomWords,
   rightCallback,
   wrongCallback,
 }) {
@@ -14,7 +14,7 @@ export function ChooseDefinitionCard({
         <div className="text-s3">{definition}</div>
       </div>
       <div className="flex flex-o-vertical m-l-20 flex-item-3">
-        {getRandomWords.map((def, i) => (
+        {randomWords.map((def, i) => (
           <button
             className="flex-item m-t-10"
             onClick={(e) => {
