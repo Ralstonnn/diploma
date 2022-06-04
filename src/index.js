@@ -14,24 +14,28 @@ import { ChooseWordByDef } from "./components/Trainings/ChooseWordByDefinition/C
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <BrowserRouter>
-    <div className="outer-container">
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="training" element={<TrainingPage />} />
-          <Route path="/training/learn-words" element={<LearnWords />} />
-          <Route path="/training/repeat-words" element={<RepeatWords />} />
-          <Route path="/dictionary" element={<Dictionary />} />
-          <Route path="/training/spell-check" element={<SpellCheck />} />
-          <Route
-            path="/training/choose-word-by-definition"
-            element={<ChooseWordByDef />}
-          />
-        </Route>
-      </Routes>
+  <React.StrictMode>
+    <div>
+      <BrowserRouter>
+        <div className="outer-container">
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path="training/" element={<TrainingPage />} />
+              <Route path="training/learn-words" element={<LearnWords />} />
+              <Route path="training/repeat-words" element={<RepeatWords />} />
+              <Route path="dictionary" element={<Dictionary />} />
+              <Route path="training/spell-check" element={<SpellCheck />} />
+              <Route
+                path="/training/choose-word-by-definition"
+                element={<ChooseWordByDef />}
+              />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
       <LoginRoutes />
     </div>
-  </BrowserRouter>
+  </React.StrictMode>
 );
 
 function LoginRoutes() {
@@ -43,10 +47,12 @@ function LoginRoutes() {
 
   if (!isLoggedIn) {
     return (
-      <Routes>
-        <Route path="/login" element={<AuthorizationForm />} />
-        <Route path="/registration" element={<RegistrationForm />} />
-      </Routes>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<AuthorizationForm />} />
+          <Route path="/registration" element={<RegistrationForm />} />
+        </Routes>
+      </BrowserRouter>
     );
   }
 }
