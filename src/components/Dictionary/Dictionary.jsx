@@ -128,19 +128,23 @@ function WordCard({
           hideWordCard();
         }}
         className="word-card bg-prm flex flex-o-vertical flex-a-center 
-        flex-j-space-evenly p-relative p-50 "
+        flex-j-center p-relative p-100 "
       >
         <CloseButton callback={hideWordCard} />
         <input
+          className="flex-item text-s3 text-align-center"
           type="text"
           value={word}
           onChange={(e) => wordOnChange(e.target.value)}
         />
         <textarea
+          className="word-card-definition flex-item m-t-30 text-s5"
           value={definition}
           onChange={(e) => definitionOnChange(e.target.value)}
         />
-        <button type="submit">Save</button>
+        <button className="m-t-30" type="submit">
+          Save
+        </button>
       </form>
     </div>
   );
