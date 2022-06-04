@@ -42,9 +42,15 @@ export function SpellCheck() {
     let value = e.target.value[e.target.value.length - 1];
 
     tempArr[index].letters[i].value = value ? value : "";
-    // TODO: Add changing to lower case
-    tempArr[index].letters[i].isRight =
-      value === tempArr[index].letters[i].rigthLetter;
+
+    if (value) {
+      tempArr[index].letters[i].isRight =
+        value.toLowerCase() ===
+        tempArr[index].letters[i].rigthLetter.toLowerCase();
+    } else {
+      tempArr[index].letters[i].isRight = false;
+    }
+
     setData(tempArr);
   };
 
@@ -82,8 +88,6 @@ export function SpellCheck() {
 
   if (isLoading) return <LoadingAnimation />;
 
-  // TODO: Take inputs to different component and set it once a card changes.
-  // Make something like i made in dictionary
   return (
     <div className="spell-check-container flex-item flex flex-j-center">
       <TrainingCard

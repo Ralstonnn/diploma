@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-// TODO: make inupts change focus on input
 export function TrainingCard({
   word,
   definition,
@@ -12,6 +11,7 @@ export function TrainingCard({
   finishOnClick,
 }) {
   const [isChecked, setIsChecked] = useState(false);
+  const inputsContainer = useRef(null);
 
   const setInputColor = (i) => {
     if (isChecked) {
@@ -19,6 +19,12 @@ export function TrainingCard({
       else return "false";
     }
     return "";
+  };
+
+  const changeInputFocus = (i) => {
+    if (i < inputsNumber - 1) {
+      inputsContainer.current.children[i + 1].focus();
+    }
   };
 
   useEffect(() => {
@@ -31,7 +37,7 @@ export function TrainingCard({
         flex-j-center bg-prm p-50"
     >
       <div className="text-s3">{definition}</div>
-      <div className="flex flex-j-space-evenly m-t-30">
+      <div className="flex flex-j-space-evenly m-t-30" ref={inputsContainer}>
         {(function () {
           let inputs = [];
 
@@ -42,7 +48,10 @@ export function TrainingCard({
                   ind-none text-s5"
                 data-is-right={setInputColor(i)}
                 value={data.letters[i].value}
-                onChange={(e) => inputOnChange(e, i)}
+                onChange={(e) => {
+                  changeInputFocus(i);
+                  inputOnChange(e, i);
+                }}
                 key={i}
                 required
               />
@@ -52,7 +61,7 @@ export function TrainingCard({
           return inputs;
         })()}
       </div>
-      {isChecked && <div className="p-t-20">Word: {word}</div>}
+      <div className="p-v-10">{isChecked && `Word ${word}`}</div>
       <div className="p-t-30">
         {!isChecked && (
           <button onClick={() => setIsChecked(true)}>Chceck</button>
