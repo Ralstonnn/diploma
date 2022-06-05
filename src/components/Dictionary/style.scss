@@ -10,6 +10,15 @@
     }
   }
 
+  .dictionary-item-content {
+    height: 100%;
+    border: 1px solid map.get($colors, "prm");
+
+    &:hover {
+      border: 1px solid map.get($colors, "prm-b");
+    }
+  }
+
   .dictionary-delete-btn {
     border: none;
     font-size: 1.3rem;

@@ -15,17 +15,19 @@ export function Item({ word, definition, showWordCard, setCardConfig }) {
   return (
     <div
       className="dictionary-item flex flex-j-space-between flex-a-center 
-      border-round-tiny bg-prm bg-prm-b-hover text-color-main-d p-20"
-      onClick={() => {
-        showWordCard();
-        setCardConfig(word, definition);
-      }}
+      border-round-tiny bg-prm text-color-main-d"
     >
-      <div className="m-r-20">
+      <div
+        className="dictionary-item-content flex-item bg-prm-b-hover p-20"
+        onClick={() => {
+          showWordCard();
+          setCardConfig(word, definition);
+        }}
+      >
         <h4>Word: {word}</h4>
         <div className="m-t-10">Definition: {definition}</div>
       </div>
-      <form onSubmit={postHandler}>
+      <form onSubmit={postHandler} className="p-20">
         <button
           className="dictionary-delete-btn bg-prm-d bg-prm-b-hover 
           text-color-main-b text-color-main-d-hover"
