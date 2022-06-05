@@ -21,14 +21,33 @@ export function TrainingCard({
     return "";
   };
 
-  const changeInputFocus = (i) => {
-    if (i < inputsNumber - 1) {
+  const setInputFocus = (e, i) => {
+    if (i < inputsNumber - 1 && e.target.value !== "")
       inputsContainer.current.children[i + 1].focus();
+  };
+
+  const handleKeyPress = (e, i) => {
+    switch (e.code) {
+      case "Enter":
+        if (isChecked && !isLast) nextOnClick();
+        else if (isChecked && isLast) finishOnClick(e);
+        else if (!isChecked) setIsChecked(true);
+        break;
+      case "ArrowLeft":
+        if (i !== 0) inputsContainer.current.children[i - 1].focus();
+        break;
+      case "ArrowRight":
+        if (i < inputsNumber - 1)
+          inputsContainer.current.children[i + 1].focus();
+        break;
+      default:
+        break;
     }
   };
 
   useEffect(() => {
     setIsChecked(false);
+    inputsContainer.current.children[0].focus();
   }, [data]);
 
   return (
@@ -49,9 +68,10 @@ export function TrainingCard({
                 data-is-right={setInputColor(i)}
                 value={data.letters[i].value}
                 onChange={(e) => {
-                  if (e.target.value !== "") changeInputFocus(i);
                   inputOnChange(e, i);
+                  setInputFocus(e, i);
                 }}
+                onKeyDown={(e) => handleKeyPress(e, i)}
                 key={i}
                 required
               />
