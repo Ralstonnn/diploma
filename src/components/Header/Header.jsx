@@ -71,7 +71,10 @@ export function Header({ setShowAddWords }) {
         <div
           className="header-add-words-btn-mobile flex-item flex-item-1 
             bg-prm-d bg-prm-hover text-s4 text-align-center p-20"
-          onClick={() => setShowAddWords(true)}
+          onClick={() => {
+            setShowAddWords(true);
+            mobileMenuBtnClick();
+          }}
         >
           Add Words
         </div>

@@ -75,10 +75,91 @@
     margin-left: -$ind;
   }
 }
-
 .ind-none {
   padding: 0;
   margin: 0;
+}
+@each $breakpointName, $breakpointValue in $breakpoints {
+  @media screen and (max-width: $breakpointValue) {
+    @each $name, $ind in $indents {
+      .p-#{$breakpointName}-#{$name} {
+        padding: $ind;
+      }
+      .p-#{$breakpointName}-v-#{$name} {
+        padding-top: $ind;
+        padding-bottom: $ind;
+      }
+      .p-#{$breakpointName}-h-#{$name} {
+        padding-left: $ind !important;
+        padding-right: $ind !important;
+      }
+      .p-#{$breakpointName}-t-#{$name} {
+        padding-top: $ind;
+      }
+      .p-#{$breakpointName}-b-#{$name} {
+        padding-bottom: $ind;
+      }
+      .p-#{$breakpointName}-r-#{$name} {
+        padding-right: $ind;
+      }
+      .p-#{$breakpointName}-l-#{$name} {
+        padding-left: $ind;
+      }
+
+      .m-#{$breakpointName}-#{$name} {
+        margin: $ind;
+      }
+      .m-#{$breakpointName}-v-#{$name} {
+        margin-top: $ind;
+        margin-bottom: $ind;
+      }
+      .m-#{$breakpointName}-h-#{$name} {
+        margin-left: $ind;
+        margin-right: $ind;
+      }
+      .m-#{$breakpointName}-t-#{$name} {
+        margin-top: $ind;
+      }
+      .m-#{$breakpointName}-b-#{$name} {
+        margin-bottom: $ind;
+      }
+      .m-#{$breakpointName}-r-#{$name} {
+        margin-right: $ind;
+      }
+      .m-#{$breakpointName}-l-#{$name} {
+        margin-left: $ind;
+      }
+
+      .m-#{$breakpointName}-ng-#{$name} {
+        margin: -$ind;
+      }
+      .m-#{$breakpointName}-ng-v-#{$name} {
+        margin-top: -$ind;
+        margin-bottom: -$ind;
+      }
+      .m-#{$breakpointName}-ng-h-#{$name} {
+        margin-left: -$ind;
+        margin-right: -$ind;
+      }
+      .m-#{$breakpointName}-ng-t-#{$name} {
+        margin-top: -$ind;
+      }
+      .m-#{$breakpointName}-ng-b-#{$name} {
+        margin-bottom: -$ind;
+      }
+      .m-#{$breakpointName}-ng-r-#{$name} {
+        margin-right: -$ind;
+      }
+      .m-#{$breakpointName}-ng-l-#{$name} {
+        margin-left: -$ind;
+      }
+    }
+
+    .ind-#{$breakpointName}-none {
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
 
 // POSITIONING
