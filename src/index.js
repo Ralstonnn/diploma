@@ -10,6 +10,7 @@ import { Dictionary } from "./components/Dictionary/Dictionary";
 import { RepeatWords } from "./components/Trainings/RepeatWords/RepeatWords";
 import { SpellCheck } from "./components/Trainings/SpellCheck/SpellCheck";
 import { ChooseWordByDef } from "./components/Trainings/ChooseWordByDefinition/ChooseWordByDef";
+import { HomePage } from "./components/HomePage/HomePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,6 +20,8 @@ root.render(
       <div className="outer-container">
         <Routes>
           <Route path="/" element={<App />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="home" element={<HomePage />} />
             <Route path="training/" element={<TrainingPage />} />
             <Route path="training/learn-words" element={<LearnWords />} />
             <Route path="training/repeat-words" element={<RepeatWords />} />
