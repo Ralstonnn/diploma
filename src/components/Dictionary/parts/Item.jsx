@@ -15,10 +15,11 @@ export function Item({ word, definition, showWordCard, setCardConfig }) {
   return (
     <div
       className="dictionary-item flex flex-j-space-between flex-a-center 
-      border-round-tiny bg-prm text-color-main-d"
+        border-round-tiny bg-prm text-color-main-d"
     >
       <div
-        className="dictionary-item-content flex-item bg-prm-b-hover p-20"
+        className="dictionary-item-content flex-item flex-item-1 
+          bg-prm-b-hover p-20"
         onClick={() => {
           showWordCard();
           setCardConfig(word, definition);
@@ -30,7 +31,7 @@ export function Item({ word, definition, showWordCard, setCardConfig }) {
       <form onSubmit={postHandler} className="p-20">
         <button
           className="dictionary-delete-btn bg-prm-d bg-prm-b-hover 
-          text-color-main-b text-color-main-d-hover"
+            text-color-main-b text-color-main-d-hover"
           type="submit"
         >
           Delete

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCardRepeatWords } from "../../TrainingCards/TrainingCards";
+import { TrainingCardRepeatWords } from "./parts/TrainingCard";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
+import "./style.scss";
 
 export function RepeatWords() {
   const navigate = useNavigate();

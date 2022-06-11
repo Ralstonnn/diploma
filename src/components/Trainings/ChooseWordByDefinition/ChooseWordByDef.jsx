@@ -128,8 +128,8 @@ export function ChooseWordByDef() {
 
   return (
     <div
-      className="choose-definition-container flex-item flex flex-a-center 
-        flex-j-center"
+      className="choose-definition-container flex-item flex-item-1 flex 
+        flex-a-center flex-j-center"
     >
       <ChooseDefinitionCard
         word={data.dictionary[index].word}

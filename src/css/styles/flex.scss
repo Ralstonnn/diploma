@@ -1,4 +1,4 @@
-@use "variables" as var;
+@use "src/css/imports.scss" as *;
 
 .flex {
   display: flex;
@@ -59,27 +59,55 @@
   &.flex-wrap {
     flex-wrap: wrap;
   }
+  @each $name, $value in $breakpoints {
+    @media screen and (max-width: $value) {
+      &.flex-#{$name}-wrap {
+        flex-wrap: wrap;
+      }
+    }
+  }
 
   .flex-item {
-    // flex-grow: 1;
-    width: 100%;
-
-    @each $name, $item in var.$flex-items {
-      &-#{$name} {
+    @each $name, $item in $flex-items {
+      &.flex-item-#{$name} {
         width: $item;
+      }
+    }
+
+    @include flexItemMedia();
+
+    &.flex-item {
+      &-a-self-center {
+        align-self: center;
+      }
+      &-a-self-start {
+        align-self: flex-start;
+      }
+      &-a-self-end {
+        align-self: flex-end;
+      }
+
+      &-j-self-end {
+        margin-left: auto;
+      }
+      &-j-self-start {
+        margin-right: auto;
+      }
+      &-j-seflt-center {
+        margin: auto;
       }
     }
   }
 
   &.flex-grow {
-    @each $name, $value in var.$flex-grow {
+    @each $name, $value in $flex-grow {
       &-#{$name} {
         flex-grow: $value;
       }
     }
   }
 
-  @each $name, $ind in var.$indents {
+  @each $name, $ind in $indents {
     &.flex-gap-#{$name} {
       gap: $ind;
     }

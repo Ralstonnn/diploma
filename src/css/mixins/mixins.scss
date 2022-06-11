@@ -34,3 +34,26 @@
   min-height: #{$height};
   max-height: #{$height};
 }
+
+@mixin flexItemMedia() {
+  @each $name, $value in $breakpoints {
+    @media screen and (max-width: $value) {
+      @each $flexItemName, $flexItemValue in $flex-items {
+        &.flex-item-#{$name}-#{$flexItemName} {
+          width: $flexItemValue;
+        }
+      }
+    }
+  }
+}
+
+@mixin breakpoint-768 {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin breakpoint-1024 {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}

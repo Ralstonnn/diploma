@@ -33,8 +33,8 @@ export function Dictionary() {
 
   return (
     <div
-      className="component-dictionary flex-item flex 
-    flex-o-vertical flex-a-center"
+      className="component-dictionary flex-item flex-item-1 flex 
+        flex-o-vertical flex-a-center"
     >
       {data.map((item, i) => {
         return (

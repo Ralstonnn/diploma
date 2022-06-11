@@ -20,8 +20,8 @@ function TrainingButton({ href, text }) {
   return (
     <Link
       to={href}
-      className="btn training-btn bg-prm-d bg-prm-hover m-h-15 m-v-10
-      text-color-main-b text-color-main-d-hover"
+      className="flex-item flex-item-768-1 btn training-btn bg-prm-d 
+        bg-prm-hover m-h-15 m-v-10 text-color-main-b text-color-main-d-hover"
     >
       {text}
     </Link>

@@ -1,0 +1,19 @@
+@use "/src/css/imports.scss" as *;
+
+$component: "training-card";
+
+.#{$component} {
+  width: $base-card-width;
+  height: $base-card-height;
+  min-width: $base-card-width;
+  min-height: $base-card-height;
+  border-radius: 2px;
+}
+
+.#{$component}-word {
+  font-size: 2.5rem;
+}
+
+.#{$component}-definition {
+  font-size: 2rem;
+}

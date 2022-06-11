@@ -1,15 +1,21 @@
-@use "../../css/styles/variables.scss" as *;
-@use "sass:map";
+@use "src/css/imports.scss" as *;
+
 $component: "header";
+$mobile-menu: "#{$component}-mobile-menu";
 
 header {
   display: flex;
-  align-items: center;
   width: 100vw;
   z-index: $header-z-index;
 
   * {
     color: white !important;
+  }
+
+  .#{$component}-wrapper {
+    position: relative;
+    height: 80px;
+    transition: max-height 1s ease-out;
   }
 
   .#{$component}-add-words-btn-icon {
@@ -34,6 +40,10 @@ header {
     }
   }
 
+  .#{$component}-add-words-btn-mobile {
+    display: none;
+  }
+
   .#{$component}-btn {
     height: 100%;
     display: flex;
@@ -43,5 +53,93 @@ header {
     border-radius: 0;
     text-decoration: none;
     font-size: 30px;
+  }
+
+  .#{$mobile-menu}-site-name {
+    display: none;
+  }
+
+  @include breakpoint-1024() {
+    .#{$component}-wrapper {
+      height: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    .#{$component}-wrapper[data-show="true"] {
+      position: absolute;
+      top: 78px;
+      left: 0;
+      height: auto;
+      max-height: 1000px;
+      width: 100%;
+      // overflow: visible;
+
+      .#{$component}-menu-site-name,
+      .#{$component}-add-words-btn,
+      .#{$component}-login-text,
+      .#{$component}-separator {
+        display: none;
+      }
+    }
+
+    .#{$component}-add-words-btn-mobile {
+      display: block;
+    }
+
+    .#{$mobile-menu}-container {
+      height: 80px;
+
+      .#{$mobile-menu}-site-name {
+        display: block;
+      }
+
+      .#{$mobile-menu}-hamburger-btn-container {
+        position: relative;
+        width: 80px;
+        height: 100%;
+        cursor: pointer;
+
+        .#{$mobile-menu}-hamburger-btn,
+        ::before,
+        ::after {
+          position: absolute;
+          width: 30px;
+          height: 4px;
+          border-radius: 2px;
+          transition: transform 800ms cubic-bezier(0.23, 1, 0.32, 1);
+          @include bgColorSet("main-b");
+        }
+
+        .#{$mobile-menu}-hamburger-btn {
+          top: calc(50% - 2px);
+          left: 25px;
+          &::after {
+            content: " ";
+            margin-top: 8px;
+          }
+
+          &::before {
+            content: " ";
+            margin-top: -8px;
+          }
+        }
+      }
+
+      .#{$mobile-menu}-hamburger-btn-container[data-checked="true"] {
+        .#{$mobile-menu}-hamburger-btn {
+          width: 0;
+
+          &::before {
+            margin-top: 0px;
+            transform: rotate(405deg);
+          }
+          &::after {
+            margin-top: 0px;
+            transform: rotate(-405deg);
+          }
+        }
+      }
+    }
   }
 }

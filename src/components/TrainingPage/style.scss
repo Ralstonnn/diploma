@@ -4,3 +4,10 @@
   @include setStrictSize(170px, 110px);
   border: none;
 }
+
+@include breakpoint-768 {
+  .training-btn {
+    max-width: none;
+    max-height: none;
+  }
+}

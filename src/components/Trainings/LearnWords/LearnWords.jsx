@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrainingCardLearnWords } from "../../TrainingCards/TrainingCards";
+import { TrainingCardLearnWords } from "./parts/TrainingCard";
 import { LoadingAnimation } from "../../LoadingAnimation/LoadingAnimation";
 import { SetDateToRepeat } from "../../../Functions/LearningCurve";
+import "./style.scss";
 
 export function LearnWords() {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ export function LearnWords() {
 
   if (isLoading) return <LoadingAnimation />;
   return (
-    <div className="flex flex-a-center flex-item m-t-20">
+    <div className="flex-item flex-item-1 flex flex-j-center m-t-20">
       <TrainingCardLearnWords
         word={word}
         definition={definition}

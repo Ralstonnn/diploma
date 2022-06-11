@@ -11,6 +11,11 @@ $container-width: (
   "1344": 1344px,
 );
 
+$breakpoints: (
+  "1024": 1024px,
+  "768": 768px,
+);
+
 $flex-grow: ();
 @for $i from 1 to 11 {
   $flex-grow: map.set($flex-grow, #{$i}, $i);
