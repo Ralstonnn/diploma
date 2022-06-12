@@ -89,7 +89,7 @@ export function SpellCheck() {
   if (isLoading) return <LoadingAnimation />;
 
   return (
-    <div className="spell-check-container flex-item flex flex-j-center">
+    <div className="spell-check-container flex-item flex-item-1 flex flex-j-center">
       <TrainingCard
         word={data[index].word}
         definition={data[index].definition}

@@ -6,4 +6,10 @@ $component: "choose-definition";
     @include setStrictSize($base-card-width, $base-card-height);
     @include bgColorSet("prm");
   }
+
+  @include breakpoint-768() {
+    .#{$component} {
+      @include resetStrictSize();
+    }
+  }
 }

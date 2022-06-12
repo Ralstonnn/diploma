@@ -31,4 +31,10 @@ $item: #{$component}-card;
       margin-left: 10px;
     }
   }
+
+  @include breakpoint-768() {
+    .#{$item} {
+      @include resetStrictSize();
+    }
+  }
 }

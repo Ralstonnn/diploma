@@ -52,7 +52,7 @@ export function TrainingCard({
 
   return (
     <div
-      className="spell-check-card flex flex-o-vertical flex-a-center 
+      className="spell-check-card flex-item flex-item-768-1 flex flex-o-vertical flex-a-center 
         flex-j-center bg-prm p-50"
     >
       <div className="text-s3">{definition}</div>
@@ -82,13 +82,27 @@ export function TrainingCard({
         })()}
       </div>
       <div className="p-v-10">{isChecked && `Word ${word}`}</div>
-      <div className="p-t-30">
+      <div className="flex-item flex-item-768-1 p-t-30">
         {!isChecked && (
-          <button onClick={() => setIsChecked(true)}>Chceck</button>
+          <button
+            className="flex-item flex-item-768-1"
+            onClick={() => setIsChecked(true)}
+          >
+            Chceck
+          </button>
         )}
-        {isChecked && !isLast && <button onClick={nextOnClick}>Next</button>}
+        {isChecked && !isLast && (
+          <button className="flex-item flex-item-768-1" onClick={nextOnClick}>
+            Next
+          </button>
+        )}
         {isChecked && isLast && (
-          <button onClick={(e) => finishOnClick(e)}>Finish</button>
+          <button
+            className="flex-item flex-item-768-1"
+            onClick={(e) => finishOnClick(e)}
+          >
+            Finish
+          </button>
         )}
       </div>
     </div>
