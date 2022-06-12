@@ -42,7 +42,10 @@ export function RepeatWords() {
   if (isLoading) return <LoadingAnimation />;
 
   return (
-    <div className="flex flex-a-center flex-item m-t-20">
+    <div
+      className="repeat-words-component flex-item flex-item-1 
+        flex flex-j-center m-t-20"
+    >
       <TrainingCardRepeatWords
         word={word}
         definition={definition}

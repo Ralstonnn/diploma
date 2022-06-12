@@ -14,18 +14,7 @@ export function TrainingCardRepeatWords({
   const navigate = useNavigate();
   const [showAnswer, setShowAnswer] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [buttons, setButtons] = useState(
-    <div className="flex flex-item flex-j-center m-t-30 ">
-      <button
-        onClick={() => {
-          setShowAnswer(true);
-        }}
-        className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
-      >
-        Show Answer
-      </button>
-    </div>
-  );
+  const [buttons, setButtons] = useState();
 
   const clickAgain = useCallback(() => {
     setIsLoading(true);
@@ -114,38 +103,56 @@ export function TrainingCardRepeatWords({
     repeatCounter,
   ]);
 
+  const clickShowAnswer = useCallback(() => {
+    setButtons(
+      <div className="flex-item flex-item-1 flex flex-wrap flex-j-space-between m-t-30">
+        <button
+          className="flex-item flex-item-768-1 bg-prm-d bg-prm-b-hover 
+        text-color-main-b text-color-main-d-hover"
+          onClick={clickAgain}
+        >
+          Again
+        </button>
+        <button
+          className="flex-item flex-item-768-1 bg-prm-d bg-prm-b-hover 
+        text-color-main-b text-color-main-d-hover m-768-t-10"
+          onClick={clickHard}
+        >
+          Hard
+        </button>
+        <button
+          className="flex-item flex-item-768-1 bg-prm-d bg-prm-b-hover 
+        text-color-main-b text-color-main-d-hover m-768-t-10"
+          onClick={clickEasy}
+        >
+          Easy
+        </button>
+      </div>
+    );
+
+    setShowAnswer(true);
+  }, [clickAgain, clickEasy, clickHard]);
+
   useEffect(() => {
-    if (showAnswer) {
-      setButtons(
-        <div className="flex flex-item flex-j-space-between m-t-30">
-          <button
-            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
-            onClick={clickAgain}
-          >
-            Again
-          </button>
-          <button
-            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
-            onClick={clickHard}
-          >
-            Hard
-          </button>
-          <button
-            className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
-            onClick={clickEasy}
-          >
-            Easy
-          </button>
-        </div>
-      );
-    }
-  }, [showAnswer, clickAgain, clickHard, clickEasy]);
+    setShowAnswer(false);
+
+    setButtons(
+      <div className="flex flex-item flex-j-center m-t-30 ">
+        <button
+          onClick={() => clickShowAnswer()}
+          className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+        >
+          Show Answer
+        </button>
+      </div>
+    );
+  }, [index, word, definition, clickShowAnswer]);
 
   if (isLoading) return <LoadingAnimation />;
 
   return (
-    <div className="flex flex-j-center flex-item">
-      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50 bg-prm">
+    <div className="flex flex-j-center flex-item flex-item-1">
+      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50 p-768-25 bg-prm">
         <div className="training-card-word">{word}</div>
         {showAnswer && (
           <div className="training-card-definition flex flex-grow-1 m-t-30">
