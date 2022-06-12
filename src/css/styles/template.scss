@@ -8,6 +8,9 @@
 
     @media screen and (max-width: $width) {
       width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
       padding: 25px 10px;
     }
   }
