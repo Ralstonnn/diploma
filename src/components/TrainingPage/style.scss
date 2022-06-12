@@ -5,7 +5,7 @@
   border: none;
 }
 
-@include breakpoint-768 {
+@include breakpoint-768() {
   .training-btn {
     max-width: none;
     max-height: none;

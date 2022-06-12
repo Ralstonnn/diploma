@@ -10,21 +10,6 @@
     }
   }
 
-  .flex-a-s {
-    &-center {
-      align-self: center;
-    }
-    &-end {
-      align-self: flex-end;
-    }
-    &-start {
-      align-self: flex-start;
-    }
-    &-baseline {
-      align-self: baseline;
-    }
-  }
-
   &.flex-j {
     &-center {
       justify-content: center;
@@ -63,6 +48,43 @@
     @media screen and (max-width: $value) {
       &.flex-#{$name}-wrap {
         flex-wrap: wrap;
+      }
+
+      &.flex-#{$name}-a {
+        &-center {
+          align-items: center;
+        }
+      }
+
+      &.flex-#{$name}-j {
+        &-center {
+          justify-content: center;
+        }
+
+        &-space-between {
+          justify-content: space-between;
+        }
+
+        &-space-evenly {
+          justify-content: space-evenly;
+        }
+      }
+
+      &.flex-#{$name}-o {
+        &-vertical {
+          flex-direction: column;
+
+          &-reverse {
+            flex-direction: column-reverse;
+          }
+        }
+        &-horizontal {
+          flex-direction: row;
+
+          &-reverse {
+            flex-direction: row-reverse;
+          }
+        }
       }
     }
   }

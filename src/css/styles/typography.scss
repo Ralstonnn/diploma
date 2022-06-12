@@ -301,3 +301,11 @@ h5,
 .text-align-center {
   text-align: center;
 }
+
+@each $name, $value in $breakpoints {
+  @media screen and (max-width: $value) {
+    .text-#{$name}-align-center {
+      text-align: center;
+    }
+  }
+}

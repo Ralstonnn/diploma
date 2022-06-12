@@ -65,7 +65,10 @@ export function LearnWords() {
 
   if (isLoading) return <LoadingAnimation />;
   return (
-    <div className="flex-item flex-item-1 flex flex-j-center m-t-20">
+    <div
+      className="learn-words-component flex-item flex-item-1 flex 
+        flex-j-center m-t-20"
+    >
       <TrainingCardLearnWords
         word={word}
         definition={definition}

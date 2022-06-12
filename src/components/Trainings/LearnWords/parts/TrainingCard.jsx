@@ -8,17 +8,24 @@ export function TrainingCardLearnWords({
   maxIndex,
 }) {
   return (
-    <div className="flex flex-j-center flex-item">
-      <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50 bg-prm">
+    <div className="flex-item flex-item-768-1 flex flex-j-center">
+      <div
+        className="training-card flex flex-o-vertical flex-a-center 
+          flex-j-space-between p-50 bg-prm"
+      >
         <div className="training-card-word">{word}</div>
         <div className="training-card-definition flex flex-grow-1 m-t-30">
           {definition}
         </div>
-        <div className="flex-item flex-item-1 flex flex-j-space-between m-t-30">
+        <div
+          className="flex-item flex-item-1 flex flex-wrap 
+            flex-j-space-between m-t-30 m-768-t-60"
+        >
           {index > 0 && (
             <button
               onClick={prevCallback}
-              className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+              className="flex-item flex-item-768-1 bg-prm-d bg-prm-b-hover 
+                text-color-main-b text-color-main-d-hover"
             >
               Previous
             </button>
@@ -27,7 +34,8 @@ export function TrainingCardLearnWords({
           {index < maxIndex && (
             <button
               onClick={nextCallback}
-              className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+              className="flex-item flex-item-768-1 bg-prm-d bg-prm-b-hover 
+                text-color-main-b text-color-main-d-hover m-768-t-20"
             >
               Next
             </button>
@@ -35,7 +43,8 @@ export function TrainingCardLearnWords({
           {index === maxIndex && (
             <button
               onClick={finishCallback}
-              className="bg-prm-d bg-prm-b-hover text-color-main-b text-color-main-d-hover"
+              className="flex-item flex-item-768-1 bg-prm-d bg-prm-b-hover 
+                text-color-main-b text-color-main-d-hover m-768-t-20"
             >
               Finish
             </button>
