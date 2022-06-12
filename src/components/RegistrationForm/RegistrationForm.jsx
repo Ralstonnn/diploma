@@ -67,8 +67,8 @@ export function RegistrationForm() {
         <div className="flex flex-o-vertical m-t-10">
           <button
             type="submit"
-            className="flex-item bg-prm-d bg-prm-b-hover text-color-main-b 
-            text-color-main-d-hover"
+            className="flex-item flex-item-1 bg-prm-d bg-prm-b-hover 
+              text-color-main-b text-color-main-d-hover"
           >
             Registration
           </button>

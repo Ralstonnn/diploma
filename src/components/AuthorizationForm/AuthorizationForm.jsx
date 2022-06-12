@@ -52,7 +52,7 @@ export function AuthorizationForm() {
         <div className="flex flex-o-vertical">
           <button
             type="submit"
-            className=" flex-item bg-prm-d bg-prm-b-hover 
+            className=" flex-item flex-item-1 bg-prm-d bg-prm-b-hover 
             text-color-main-b text-color-main-d-hover"
           >
             Login
