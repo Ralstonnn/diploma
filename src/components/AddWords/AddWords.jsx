@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CloseButton } from "../CloseBtn/CloseBtn";
+import { disableScroll, enableScroll } from "../../Functions/scrollFunctions";
+import { setOffsetY } from "../../Functions/setOffsets";
 import "./style.scss";
 
 export function AddWords({ closeBtnClick }) {
   const [word, setWord] = useState("");
   const [definition, setDefinition] = useState("");
+  const addWordsContainer = useRef(null);
 
   const postHandler = (e) => {
     e.preventDefault();
@@ -30,10 +33,16 @@ export function AddWords({ closeBtnClick }) {
       });
   };
 
+  useEffect(() => {
+    setOffsetY(addWordsContainer.current);
+    disableScroll();
+  }, []);
+
   return (
     <div
       className="component-add-words flex-item flex-item-1 flex 
         flex-j-center flex-a-center"
+      ref={addWordsContainer}
     >
       <div className="add-word-bg"></div>
       <form
@@ -41,7 +50,12 @@ export function AddWords({ closeBtnClick }) {
         className="flex flex-o-vertical flex-a-center p-40 border-round-tiny 
           border-color-main-sd m-b-100 bg-prm"
       >
-        <CloseButton callback={closeBtnClick} />
+        <CloseButton
+          callback={() => {
+            enableScroll();
+            closeBtnClick();
+          }}
+        />
         <input
           className="add-word-word-input flex-item flex-item-1 border-round-tiny"
           type="text"

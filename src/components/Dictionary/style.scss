@@ -4,10 +4,16 @@
 .component-dictionary {
   .dictionary-item {
     width: 600px;
+    max-height: 180px;
 
-    & ~ .dictionary-item {
+    & + .dictionary-item {
       margin-top: 20px;
     }
+  }
+
+  .dictionary-item-definition {
+    max-height: 90px;
+    overflow-y: scroll;
   }
 
   .dictionary-item-content {
@@ -46,5 +52,15 @@
 
   .word-card-definition {
     min-height: 270px;
+  }
+
+  @include breakpoint-768() {
+    .dictionary-item {
+      max-height: 330px;
+    }
+    .dictionary-item-definition {
+      max-height: 120px;
+      overflow-y: scroll;
+    }
   }
 }

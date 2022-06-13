@@ -153,9 +153,9 @@ export function TrainingCardRepeatWords({
   return (
     <div className="flex flex-j-center flex-item flex-item-1">
       <div className="flex flex-o-vertical flex-a-center flex-j-space-between training-card p-50 p-768-25 bg-prm">
-        <div className="training-card-word">{word}</div>
+        <div className="training-card-word text-s2">{word}</div>
         {showAnswer && (
-          <div className="training-card-definition flex flex-grow-1 m-t-30">
+          <div className="training-card-definition flex flex-grow-1 m-t-30 text-s4">
             {definition}
           </div>
         )}

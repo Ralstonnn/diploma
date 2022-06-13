@@ -17,6 +17,17 @@
 }
 
 .container-main-100 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100vw;
-  height: calc(100vh);
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.container-main-100[data-disable-scroll="true"] {
+  overflow: hidden;
 }

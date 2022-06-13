@@ -64,7 +64,7 @@ export function TrainingCard({
             inputs.push(
               <input
                 className="spell-check-input border-round-tiny text-align-center 
-                  ind-none text-s5 m-5"
+                  text-s5 m-5"
                 data-is-right={setInputColor(i)}
                 value={data.letters[i].value}
                 onChange={(e) => {

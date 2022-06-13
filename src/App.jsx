@@ -44,7 +44,7 @@ function MainPage() {
   const [showAddWords, setShowAddWords] = useState(false);
 
   return (
-    <div className="outer-container">
+    <div className="container-main-100" id="app-content-container">
       <Header setShowAddWords={(value) => setShowAddWords(value)} />
       <main className="container-1344 flex">
         <Outlet />

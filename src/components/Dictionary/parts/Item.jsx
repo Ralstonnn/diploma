@@ -25,10 +25,13 @@ export function Item({ word, definition, showWordCard, setCardConfig }) {
           setCardConfig(word, definition);
         }}
       >
-        <div className="flex-item flex-item-768-1 text-768-align-center">
-          <h4>{word}</h4>
+        <div className="flex-item flex-item-768-1 text-768-align-center text-s4">
+          {word}
         </div>
-        <div className="m-t-10 m-768-t-30 text-768-align-center">
+        <div
+          className="dictionary-item-definition m-t-10 m-768-t-30 
+            text-768-align-center text-s5"
+        >
           {definition}
         </div>
       </div>
