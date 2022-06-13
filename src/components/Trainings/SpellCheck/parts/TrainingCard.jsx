@@ -56,7 +56,7 @@ export function TrainingCard({
         flex-j-center bg-prm p-50"
     >
       <div className="text-s3">{definition}</div>
-      <div className="flex flex-j-space-evenly m-t-30" ref={inputsContainer}>
+      <div className="flex flex-wrap m-t-30 m-ng-5" ref={inputsContainer}>
         {(function () {
           let inputs = [];
 
@@ -64,7 +64,7 @@ export function TrainingCard({
             inputs.push(
               <input
                 className="spell-check-input border-round-tiny text-align-center 
-                  ind-none text-s5"
+                  ind-none text-s5 m-5"
                 data-is-right={setInputColor(i)}
                 value={data.letters[i].value}
                 onChange={(e) => {

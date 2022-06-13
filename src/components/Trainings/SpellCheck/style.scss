@@ -27,9 +27,9 @@ $item: #{$component}-card;
       color: #f44336;
     }
 
-    & + .#{$component}-input {
-      margin-left: 10px;
-    }
+    // & + .#{$component}-input {
+    //   margin-left: 10px;
+    // }
   }
 
   @include breakpoint-768() {
