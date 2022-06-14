@@ -8,6 +8,11 @@ $item: #{$component}-card;
     @include setStrictSize($base-card-width, $base-card-height);
   }
 
+  .#{$item}-definition {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
   .#{$component}-input {
     border: 1px solid black;
     height: 40px;

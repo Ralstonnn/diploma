@@ -11,7 +11,7 @@ export function ChooseDefinitionCard({
         flex-j-space-between flex-768-wrap p-50"
     >
       <div className="flex-item flex-item-1 text-align-center">
-        <div className="text-s3">{definition}</div>
+        <div className="choose-definition-definition text-s3">{definition}</div>
       </div>
       <div
         className="flex-item flex-item-3 flex-item-768-1 flex flex-o-vertical 

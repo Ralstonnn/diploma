@@ -9,9 +9,9 @@ function TrainingPage() {
         m-768-h-none m-768-ng-v-5"
     >
       <TrainingButton text="Learn" href="/training/learn-words" />
-      <TrainingButton text="SpellCheck" href="/training/spell-check" />
+      <TrainingButton text="Spell Check" href="/training/spell-check" />
       <TrainingButton
-        text="ChooseDefinition"
+        text="Choose Word"
         href="/training/choose-word-by-definition"
       />
       <TrainingButton text="Repeat" href="/training/repeat-words" />
@@ -25,7 +25,7 @@ function TrainingButton({ href, text }) {
       to={href}
       className="flex-item flex-item-768-1 btn training-btn bg-prm-d 
         bg-prm-hover m-h-15 m-v-10 m-768-h-none m-768-v-5 
-        text-color-main-b text-color-main-d-hover"
+        text-color-main-b text-color-main-d-hover text-nowrap"
     >
       {text}
     </Link>

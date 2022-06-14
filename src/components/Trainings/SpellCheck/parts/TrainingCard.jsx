@@ -55,7 +55,7 @@ export function TrainingCard({
       className="spell-check-card flex-item flex-item-768-1 flex flex-o-vertical flex-a-center 
         flex-j-center bg-prm p-50"
     >
-      <div className="text-s3">{definition}</div>
+      <div className="spell-check-card-definition text-s3">{definition}</div>
       <div className="flex flex-wrap m-t-30 m-ng-5" ref={inputsContainer}>
         {(function () {
           let inputs = [];

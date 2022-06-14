@@ -12,16 +12,17 @@ $training-card: "training-card";
     border-radius: 2px;
   }
 
+  .#{$training-card}-definition {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
   @include breakpoint-768() {
     .#{$training-card} {
       width: 100%;
       height: $base-card-height-mobile;
       min-width: auto;
       min-height: auto;
-    }
-
-    .#{$training-card}-definition {
-      overflow-y: scroll;
     }
   }
 }

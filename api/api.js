@@ -23,6 +23,46 @@ app.use(
 
 // TODO: Find out if its safe to pass an id from db to the component
 // TODO: add error handling
+app.get("/api/get-user-data", (req, resp) => {
+  con.query(
+    `select id, name, surname, email from users where login='${req.session.login}'`,
+    (err, res) => {
+      if (err) {
+        resp.json({ response: "n" });
+        return;
+      }
+      let user = { ...res[0] };
+      let userId = user.id;
+      delete user.id;
+
+      con.query(
+        `select word, to_learn, to_spellcheck, to_choose_word from dictionary where user_id=${userId}`,
+        (err, res) => {
+          if (err) {
+            resp.json({ response: "n" });
+            return;
+          }
+
+          user.wordsCount = res.length;
+          user.toLearn = 0;
+          user.toRepeat = 0;
+          user.toSpellcheck = 0;
+          user.toChooseWord = 0;
+
+          res.forEach((item) => {
+            if (item["to_learn"] === 1) user.toLearn++;
+            else user.toRepeat++;
+            if (item["to_spellcheck"] === 1) user.toSpellcheck++;
+            if (item["to_choose_word"] === 1) user.toChooseWord++;
+          });
+
+          resp.json(user);
+        }
+      );
+    }
+  );
+});
+
 app.get("/api/get-words", (req, resp) => {
   con.query(
     `select d.word, d.definition from dictionary d inner join users u 

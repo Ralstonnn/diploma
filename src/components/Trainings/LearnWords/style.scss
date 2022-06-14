@@ -17,6 +17,8 @@ $training-card: "training-card";
   }
 
   .#{$training-card}-definition {
+    max-height: 300px;
+    overflow-y: auto;
     font-size: 2rem;
   }
 
