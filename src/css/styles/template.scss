@@ -24,10 +24,22 @@
   max-width: 100vw;
   height: 100vh;
   max-height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
-.container-main-100[data-disable-scroll="true"] {
+.container-main-100::-webkit-scrollbar {
+  width: 1em;
+}
+
+.container-main-100::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.container-main-100::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}
+
+[data-disable-scroll="true"] {
   overflow: hidden;
 }
