@@ -4,7 +4,7 @@ import { disableScroll, enableScroll } from "../../Functions/scrollFunctions";
 import { setOffsetY } from "../../Functions/setOffsets";
 import "./style.scss";
 
-export function AddWords({ closeBtnClick }) {
+export function AddWords({ closeBtnClick, forceUpdate }) {
   const [word, setWord] = useState("");
   const [definition, setDefinition] = useState("");
   const addWordsContainer = useRef(null);
@@ -29,6 +29,7 @@ export function AddWords({ closeBtnClick }) {
           setDefinition("");
 
           if (data.response === "y") alert("Word added");
+          forceUpdate();
         }
       });
   };

@@ -179,6 +179,11 @@ h5,
 .text-s5 {
   font-size: 1.5rem;
 }
+h6,
+.h6,
+.text-s6 {
+  font-size: 1.25rem;
+}
 .text-small {
   font-size: 0.75rem;
 }
@@ -326,6 +331,9 @@ h5,
     }
     .text-#{$breakpointName}-s5 {
       font-size: 1.5rem;
+    }
+    .text-#{$breakpointName}-s6 {
+      font-size: 1.25rem;
     }
   }
 }

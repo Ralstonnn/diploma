@@ -42,6 +42,8 @@ function App() {
 
 function MainPage() {
   const [showAddWords, setShowAddWords] = useState(false);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   return (
     <div className="container-main-100" id="app-content-container">
@@ -52,6 +54,7 @@ function MainPage() {
 
       {showAddWords && (
         <AddWords
+          updateState={forceUpdate}
           closeBtnClick={() => {
             setShowAddWords(false);
           }}

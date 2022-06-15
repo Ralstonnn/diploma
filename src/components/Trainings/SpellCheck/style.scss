@@ -16,8 +16,9 @@ $item: #{$component}-card;
   .#{$component}-input {
     border: 1px solid black;
     height: 40px;
-    width: 30px;
+    width: 40px;
     pointer-events: initial;
+    text-transform: lowercase;
 
     &[data-is-right="false"],
     &[data-is-right="true"] {
@@ -31,10 +32,6 @@ $item: #{$component}-card;
     &[data-is-right="false"] {
       color: #f44336;
     }
-
-    // & + .#{$component}-input {
-    //   margin-left: 10px;
-    // }
   }
 
   @include breakpoint-768() {

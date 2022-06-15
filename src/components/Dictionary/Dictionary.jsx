@@ -3,21 +3,30 @@ import { LoadingAnimation } from "../LoadingAnimation/LoadingAnimation";
 import { WordCard } from "./parts/WordCard";
 import { Item } from "./parts/Item";
 import "./style.scss";
+import { useCallback } from "react";
 
+// TODO: make force refresh on word or definition change
 export function Dictionary() {
   const [data, setData] = useState([]);
   const [showWordCard, setShowWordCard] = useState(false);
   const [cardConfig, setCardConfig] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
 
   const onWordCardSubmit = (e) => {
+    e.preventDefault();
+
     const formData = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...cardConfig }),
     };
 
-    fetch("/api/update-word", formData);
+    fetch("/api/update-word", formData).then(() => {
+      setIsLoading(true);
+      forceUpdate();
+    });
   };
 
   useEffect(() => {
@@ -27,7 +36,7 @@ export function Dictionary() {
         setData(res);
         setIsLoading(false);
       });
-  }, []);
+  });
 
   if (isLoading) return <LoadingAnimation />;
 

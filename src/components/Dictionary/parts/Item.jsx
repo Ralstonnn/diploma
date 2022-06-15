@@ -1,5 +1,7 @@
 export function Item({ word, definition, showWordCard, setCardConfig }) {
-  const postHandler = () => {
+  const postHandler = (e) => {
+    e.preventDefault();
+
     const formData = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -9,7 +11,11 @@ export function Item({ word, definition, showWordCard, setCardConfig }) {
       }),
     };
 
-    fetch("/api/delete-word", formData);
+    fetch("/api/delete-word", formData)
+      .then((resp) => resp.json())
+      .then((res) => {
+        if (res.response === "y") alert("word deleted");
+      });
   };
 
   return (
@@ -36,7 +42,7 @@ export function Item({ word, definition, showWordCard, setCardConfig }) {
         </div>
       </div>
       <form
-        onSubmit={postHandler}
+        onSubmit={(e) => postHandler(e)}
         className="flex-item flex-item-768-1 flex flex-768-j-center p-20"
       >
         <button

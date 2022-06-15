@@ -23,7 +23,7 @@ export function HomePage() {
         <div className="flex-item flex-item-1 text-color-main-sd">Name:</div>
         <div className="flex-item flex-item-1 text-s3">{userData.name}</div>
         <div className="flex-item flex-item-1 text-color-main-sd m-t-20">
-          Sruname:
+          Surname:
         </div>
         <div className="flex-item flex-item-1 text-s3">{userData.surname}</div>
       </div>
