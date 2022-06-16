@@ -81,7 +81,7 @@ export function TrainingCard({
           return inputs;
         })()}
       </div>
-      <div className="p-v-10">{isChecked && `Word ${word}`}</div>
+      <div className="p-v-10">{isChecked && `Word: ${word}`}</div>
       <div className="flex-item flex-item-768-1 p-t-30">
         {!isChecked && (
           <button
