@@ -68,7 +68,10 @@ app.get("/api/get-words", (req, resp) => {
     `select d.word, d.definition from dictionary d inner join users u 
     on d.user_id = u.id where u.login = '${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       resp.json(res);
     }
   );
@@ -80,7 +83,10 @@ app.get("/api/learn-words", (req, resp) => {
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and d.to_learn = 1`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       resp.json(res);
     }
   );
@@ -93,7 +99,10 @@ app.get("/api/repeat-words", (req, resp) => {
     where u.login = '${req.session.login}' and d.to_learn = 0 and 
     d.repeat_date <= curdate()`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       resp.json(res);
     }
   );
@@ -105,7 +114,10 @@ app.get("/api/spell-check", (req, resp) => {
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and to_spellcheck = 1`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       resp.json(res);
     }
   );
@@ -117,12 +129,18 @@ app.get("/api/choose-word-by-definition", (req, resp) => {
     dictionary d inner join users u on d.user_id = u.id 
     where u.login = '${req.session.login}' and to_choose_word = 1`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let wordsFromDictionary = res;
 
       if (wordsFromDictionary.length > 0 && wordsFromDictionary.length < 10) {
         con.query(`select word from placeholder_dictionary`, (err, res) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            return resp.json({ response: "n" });
+          }
           resp.json({
             dictionary: wordsFromDictionary,
             placeholderDictionary: res,
@@ -141,7 +159,10 @@ app.post("/api/set-to-learn", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let user_id = res[0].id;
 
       con.query(
@@ -149,7 +170,10 @@ app.post("/api/set-to-learn", (req, resp) => {
         word='${req.body.word}' and definition='${req.body.definition}' 
         and user_id=${user_id} `,
         (err) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            return resp.json({ response: "n" });
+          }
           resp.json({ response: "y" });
         }
       );
@@ -161,7 +185,10 @@ app.post("/api/set-reprat-date", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let user_id = res[0].id;
 
       if (req.body.increaseRepeatCounter) {
@@ -170,7 +197,10 @@ app.post("/api/set-reprat-date", (req, resp) => {
           repeat_counter = repeat_counter+1 where word='${req.body.word}' 
           and definition='${req.body.definition}' and user_id=${user_id} `,
           (err) => {
-            if (err) throw err;
+            if (err) {
+              console.log(err);
+              return resp.json({ response: "n" });
+            }
             resp.json({ response: "y" });
           }
         );
@@ -183,7 +213,10 @@ app.post("/api/set-reprat-date", (req, resp) => {
         repeat_counter = 1 where word='${req.body.word}' 
         and definition='${req.body.definition}' and user_id=${user_id} `,
         (err) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            return resp.json({ response: "n" });
+          }
           resp.json({ response: "y" });
         }
       );
@@ -195,13 +228,19 @@ app.post("/api/add-words", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let user_id = res[0].id;
       con.query(
         `insert into dictionary (word, definition, user_id) 
             value ('${req.body.word}', '${req.body.definition}', ${user_id})`,
         (err) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            return resp.json({ response: "n" });
+          }
           resp.json({ response: "y" });
         }
       );
@@ -213,7 +252,10 @@ app.post("/api/update-word", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let user_id = res[0].id;
 
       con.query(
@@ -223,7 +265,10 @@ app.post("/api/update-word", (req, resp) => {
         and definition='${req.body.definitionToChange}'
         and user_id=${user_id}`,
         (err) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            return resp.json({ response: "n" });
+          }
           resp.json({ response: "y" });
         }
       );
@@ -235,14 +280,20 @@ app.post("/api/delete-word", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let user_id = res[0].id;
 
       con.query(
         `delete from dictionary where user_id=${user_id} and 
         word='${req.body.word}' and definition='${req.body.definition}'`,
         (err) => {
-          if (err) throw err;
+          if (err) {
+            console.log(err);
+            return resp.json({ response: "n" });
+          }
           resp.json({ response: "y" });
         }
       );
@@ -255,7 +306,10 @@ app.post("/api/finish-learn-training", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       let user_id = res[0].id;
 
       req.body.result.forEach((item) => {
@@ -264,7 +318,10 @@ app.post("/api/finish-learn-training", (req, resp) => {
           repeat_date='${item.repeat_date}', to_learn=0 
           where word='${item.word}' and user_id = ${user_id}`,
           (err) => {
-            if (err) throw err;
+            if (err) {
+              console.log(err);
+              return resp.json({ response: "n" });
+            }
           }
         );
       });
@@ -281,7 +338,10 @@ app.post("/api/choose-word-by-definition-finish-training", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       user_id = res[0].id;
 
       req.body.data.forEach((item) => {
@@ -299,7 +359,10 @@ app.post("/api/choose-word-by-definition-finish-training", (req, resp) => {
       });
 
       con.query(queryStr, (err) => {
-        if (err) throw err;
+        if (err) {
+          console.log(err);
+          return resp.json({ response: "n" });
+        }
         resp.json({ response: "y" });
       });
     }
@@ -313,7 +376,10 @@ app.post("/api/finish-spell-check-training", (req, resp) => {
   con.query(
     `select id from users where login='${req.session.login}'`,
     (err, res) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        return resp.json({ response: "n" });
+      }
       user_id = res[0].id;
 
       req.body.result.forEach((item) => {
@@ -329,7 +395,10 @@ app.post("/api/finish-spell-check-training", (req, resp) => {
       });
 
       con.query(queryStr, (err) => {
-        if (err) throw err;
+        if (err) {
+          console.log(err);
+          return resp.json({ response: "n" });
+        }
         resp.json({ response: "y" });
       });
     }
